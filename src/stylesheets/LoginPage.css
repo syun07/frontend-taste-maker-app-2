@@ -1,0 +1,94 @@
+.login-page-grid {
+	background: url(../images/background.png) no-repeat center center;
+	background-size: cover;	
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+}
+
+.button-page-container {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	top: 25%;
+	flex-direction: column;
+	align-items: center;
+}
+
+.title-container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	
+}
+
+.title-one {
+	font-family: 'Lobster', cursive;
+	color:ghostwhite;
+	font-size: 45px;
+	vertical-align: top;
+	height: 12px;
+}
+
+.title-two {
+	font-family: 'Bungee Inline', cursive;
+	letter-spacing: 5px;
+	font-size: 60px;
+	color: antiquewhite;
+	vertical-align: top;
+	height: 12px;
+}
+
+.tagline {
+	font-style: italic;
+	color: ghostwhite;
+}
+
+.open-page-btns {
+	position: absolute;
+	top: 300%;
+}
+
+.labels {
+	font-family: 'Bungee Inline', cursive;
+	letter-spacing: 5px;
+	font-size: 30px;
+	color: antiquewhite;
+}
+
+.ui.inverted.teal.button {
+	letter-spacing: 4px;
+	margin-right: 16px;
+}
+
+.ui.teal.button {
+	letter-spacing: 4px;
+	margin-left: 16px;
+}
+
+.ui.form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	top: 28%;
+	width: 1000px;
+}
+
+input {
+	text-align: center;
+	width: 18em !important;
+	height: 2.5em !important;
+}
+
+.ui.form .title {
+	font-size: 30px;
+}
+
+#back-btn {
+	letter-spacing: 2px;
+	position: absolute;
+	left: 6%;
+	top: 8%;
+}
