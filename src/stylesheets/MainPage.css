@@ -1,5 +1,6 @@
 .App {
 	background: url(../images/background.png) center center;
+	
   display: flex;
   flex-direction: column;
 	align-items: center;
@@ -53,14 +54,14 @@
 
 /* search results for explore page */
 .ui.container .searched-result-container {
-	margin-top: 4.5em;
+	margin-top: 2em;
 	display: flex;
 	flex-direction: column;
 	text-align: center;
 	align-items: center;
 	overflow-y: scroll;
 	border: solid 0.5px aliceblue;
-	height: 100vh;
+	height: 70vh;
 	border-radius: 45px;
 	padding: 1em;
 	color: white;

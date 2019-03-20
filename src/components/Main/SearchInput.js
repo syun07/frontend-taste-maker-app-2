@@ -28,28 +28,23 @@ class SearchInput extends Component {
 	// 	}
 	// }
 
-	handleSearch = (event, genre) => {
+	handleSearch = (event) => {
 		this.props.saveSearch(event.target.value)
-		fetchSearch(this.props.userSearch, this.props.searchType)
-		.then(data => {
-			if (this.props.userSearch === '') {
-				this.props.handleResult(false)
-			} else {
-				genre = this.props.searchType
-			fetchSearch(this.props.userSearch, genre)
-				.then(data => {
-					if (data.Similar.Info.length === 1 ) {
-						this.props.handleResult(true)
-						this.props.getSearchedData(data.Similar.Info[0])
-						this.props.getRecData(data.Similar.Results)
-					} else {
-						this.props.handleResult(false)
-					}
-				})
-			}
-		})
+		if (event.target.value === '' || event.target.value === ' ') {
+			this.props.handleResult(false)
+		} else {
+			fetchSearch(event.target.value, this.props.searchType)
+			.then(data => {
+				if (data.Similar.Info.length === 1) {
+					this.props.handleResult(true)
+					this.props.getSearchedData(data.Similar.Info[0])
+					this.props.getRecData(data.Similar.Results)
+				} else {
+					this.props.handleResult(false)
+				}
+			})
+		}
 	}
-
 	render() {
 		return (
 			<Container className='search-input-container'>
