@@ -89,13 +89,8 @@ class MainPage extends Component {
 		let page;
 		
 		if (this.props.activeItem === 'home') {
-			this.props.handleResult(false)
-			this.props.clearSearch()
-			this.props.getRecData([])
 			page = homePage
 		} else if (this.props.activeItem === 'explore') {
-			this.props.clearSearchType()
-			this.props.handleResult(false)
 			page = searchIndPage
 		} else if (this.props.activeItem === 'wavelength') {
 			page = wavelength
