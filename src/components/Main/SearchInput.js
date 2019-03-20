@@ -9,31 +9,25 @@ import { saveSearch, handleTypeChange, getSearchedData, getRecData, handleResult
 
 class SearchInput extends Component {
 
-	// handleSearch = (event, genre) => {
-	// 	this.props.saveSearch(event.target.value)
-	// 	if (event.target.value === '' || event.target.value === ' ') {
-	// 		this.props.handleResult(false)
-	// 	} else {
-	// 		genre = this.props.searchType
-	// 	fetchInfo(event.target.value, genre)
-	// 		.then(data => {
-	// 			if (data.Similar.Info.length === 1 ) {
-	// 				this.props.handleResult(true)
-	// 				this.props.getSearchedData(data.Similar.Info[0])
-	// 				this.props.getRecData(data.Similar.Results)
-	// 			} else {
-	// 				this.props.handleResult(false)
-	// 			}
-	// 		})
-	// 	}
-	// }
-
-	handleSearch = (event) => {
+	// when user enters something in search
+	// (query, genre) = (event.target.value, this.props.searchType)
+	handleChange = event => {
 		this.props.saveSearch(event.target.value)
-		if (event.target.value === '' || event.target.value === ' ') {
+		this.handleSearch(event.target.value, this.props.searchType)
+	}
+
+	// when user clicks a genre (before or after search)
+	// (query, genre) = (this.props.userSearch, genre that's passed in as a string)
+	handleClick = genre => {
+		this.props.handleTypeChange(genre)
+		this.handleSearch(this.props.userSearch, genre)
+	}
+
+	handleSearch = (query, genre) => {
+		if (query === '' || query === ' ') {
 			this.props.handleResult(false)
 		} else {
-			fetchSearch(event.target.value, this.props.searchType)
+			fetchSearch(query, genre)
 			.then(data => {
 				if (data.Similar.Info.length === 1) {
 					this.props.handleResult(true)
@@ -45,38 +39,39 @@ class SearchInput extends Component {
 			})
 		}
 	}
+
 	render() {
 		return (
 			<Container className='search-input-container'>
 				<h4>FIND ME</h4>
 				<div>
 					<Button color='red'
-						onClick={() => this.props.handleTypeChange('music')}>
+						onClick={() => this.handleClick('music')}>
 						<i className='music icon' /> Music
 					</Button>
 
 					<Button color='orange'
-						onClick={() => this.props.handleTypeChange('movies')}>
+						onClick={() => this.handleClick('movies')}>
 						<i className='film icon' /> Movies
 					</Button>
 
 					<Button color='yellow'
-						onClick={() => this.props.handleTypeChange('shows')}>
+						onClick={() => this.handleClick('shows')}>
 						<i className='tv icon' /> Shows
 					</Button>
 
 					<Button color='green'
-						onClick={() => this.props.handleTypeChange('podcasts')}>
+						onClick={() => this.handleClick('podcasts')}>
 						<i className='podcast icon' /> Podcasts
 					</Button>
 
 					<Button color='blue'
-						onClick={() => this.props.handleTypeChange('books')}>
+						onClick={() => this.handleClick('books')}>
 						<i className='book icon' /> Books
 					</Button>
 
 					<Button color='purple'
-						onClick={() => this.props.handleTypeChange('games')}>
+						onClick={() => this.handleClick('games')}>
 						<i className='gamepad icon' /> Games
 					</Button>
 				</div>
@@ -84,7 +79,7 @@ class SearchInput extends Component {
 
 				<Input id='search'
 					placeholder='SEARCH ANY SONG/ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'
-					onChange={(event) => this.handleSearch(event, this.props.searchType)} />
+					onChange={(event) => this.handleChange(event)} />
 
 			</Container>
 		)

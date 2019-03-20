@@ -82,9 +82,7 @@ class RecCard extends Component {
 					{tagType}
 					<br/>
 					<Card.Description>
-						{wTeaser.slice(0, 300)}
-						{/* FIX THIS LATER */}
-						<p onClick={null}>...more</p>
+						<p>{wTeaser}</p>
 					</Card.Description>
 				</Card.Content>
 
