@@ -117,9 +117,9 @@
 	margin:10px !important
 }
 
-/* search results for explore page */
+/* search results for home page */
 .ui.container #rec-cards-container {
-	margin-top: 4.5em;
+	margin-top: 2em;
 	display: flex;
 	flex-flow: row wrap;
 	text-align: center;
@@ -127,7 +127,7 @@
 	align-self: center;
 	overflow-y: scroll;
 	border: solid 0.5px aliceblue;
-	height: 100vh;
+	height: 70vh;
 	border-radius: 45px;
 	padding: 2em;
 }

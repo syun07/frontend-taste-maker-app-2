@@ -9,12 +9,16 @@ import '../../stylesheets/MainPage.css'
 
 class SearchIndividual extends Component {
 
-	handleSearch = (event) => {
+	handleChange = (event) => {
 		this.props.saveSearch(event.target.value)
-		if (event.target.value === '' || event.target.value === ' ') {
+		this.handleSearch(event.target.value, this.props.searchType)
+	}
+
+	handleSearch = (query, genre) => {
+		if (query === '' || query === ' ') {
 			this.props.handleResult(false)
 		} else {
-			fetchSearch(event.target.value, this.props.searchType)
+			fetchSearch(query, genre)
 			.then(data => {
 				if (data.Similar.Info.length === 1) {
 					this.props.handleResult(true)
@@ -60,7 +64,7 @@ class SearchIndividual extends Component {
 				<h4>FOR MORE INFORMATION</h4>
 				<Input id='search'
 					placeholder='SEARCH ANY SONG/ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'
-					onChange={this.handleSearch} />
+					onChange={(event) => this.handleChange(event)} />
 			</Container>
 		)
 	}
