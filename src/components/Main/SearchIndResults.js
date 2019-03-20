@@ -83,13 +83,13 @@ class SearchIndResults extends Component {
 				
 			<Container className='searched-result-container'>
 				<br/>
-				<h5 className='result-name'>Please enter a song/artist, movie, show, podcast, book/author, or game to find more information!</h5>
+				<p className='result-messages'>Please enter a song/artist, movie, show, podcast, book/author, or game to find more information!</p>
 			</Container>
 		:
 			<Container className='searched-result-container'>
+					{tagType}
 				<h2 className='result-name'>{Name}</h2>
-
-				{tagType}
+				
 
 				<Label
 					className='add-to-wl'

@@ -13,27 +13,27 @@ class SearchResults extends Component {
 				rec={rec}
 			/>
 		)
+		
+		const wasOrWere = this.props.searchType === 'music' ? 'was' : 'were'
 
 		return (
-			this.props.result === false ? 
+			this.props.userSearch.length > 1 && this.props.recData.length === 0 ?
 				<Container className='searched-result-container'>
-					<br/>
-					<h4 className='result-name'>What are some things you love?</h4>
-					<h4 className='result-name'>Search to find things on that wavelength!</h4>
+					<p className='result-messages'>Sorry, there {wasOrWere} no {this.props.searchType} found on the same wavelength as {this.props.userSearch}</p>
 				</Container>
-				
-				:
-
-				<Container id='rec-cards-container'>
-						{mappedResults}
-				</Container>
+				 :
+			<Container id='rec-cards-container'>
+				{mappedResults}
+			</Container>
 		)
 	}
 }
 
 const mapStateToProps = state => {
+	console.log('results', state)
 	return ({
 		result: state.result,
+		userSearch: state.userSearch,
 		searchType: state.searchType,
 		searchedData: state.searchedData,
 		recData: state.recData

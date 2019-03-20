@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
 		case 'GO_BACK':
 			return { ...state, form: 'b' }
 		case 'CHANGE_LOGIN':
-			return { ...state, loginSuccess: true }
+			return { ...state, loginSuccess: action.boo }
 		case 'SET_USER_INFO':
 			return { ...state, userData: action.data, userTastes: action.data.tastes }
 		
@@ -44,6 +44,9 @@ export default (state = initialState, action) => {
 		// SAVE SEARCH & TYPE
 		case 'SAVE_SEARCH':
 			return { ...state, userSearch: action.query }
+
+		case 'CLEAR_SEARCH':
+			return {...state, userSearch: ''}
 		
 		case 'HANDLE_TYPE_CHANGE':
 			return { ...state, searchType: action.genre }

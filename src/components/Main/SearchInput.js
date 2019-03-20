@@ -24,7 +24,7 @@ class SearchInput extends Component {
 	}
 
 	handleSearch = (query, genre) => {
-		if (query === '' || query === ' ') {
+		if (query === '' || query.length < 2) {
 			this.props.handleResult(false)
 		} else {
 			fetchSearch(query, genre)
@@ -40,10 +40,21 @@ class SearchInput extends Component {
 		}
 	}
 
+	
 	render() {
+
+		const type = this.props.searchType === '' ? 'All Categories' : this.props.searchType
+
 		return (
 			<Container className='search-input-container'>
-				<h4>FIND ME</h4>
+				<h4>WHAT ARE SOME THINGS YOU LOVE?<br/> SEARCH TO FIND THINGS ON THAT WAVELENGTH!</h4>
+				
+				<Input id='search'
+					placeholder='SEARCH ANY SONG/ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'
+					onChange={(event) => this.handleChange(event)} />
+				
+				<h4>FILTER BY TYPE</h4>
+
 				<div>
 					<Button color='red'
 						onClick={() => this.handleClick('music')}>
@@ -75,24 +86,25 @@ class SearchInput extends Component {
 						<i className='gamepad icon' /> Games
 					</Button>
 				</div>
-				<h4>ON THE SAME WAVELENGTH AS</h4>
 
-				<Input id='search'
-					placeholder='SEARCH ANY SONG/ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'
-					onChange={(event) => this.handleChange(event)} />
 
+
+				<br />
+				{this.props.result === true ?
+					<p className='result-name' id='result-name-desc'>{type} ON THE SAME WAVELENGTH AS {this.props.userSearch}</p> : null
+				}
 			</Container>
 		)
 	}
 }
 
 const mapStateToProps = state => {
-	console.log(state)
 	return ({
 		activeItem: state.activeItem,
 		userSearch: state.userSearch,
 		searchType: state.searchType,
-		searchedData: state.searchedData
+		searchedData: state.searchedData,
+		result: state.result
 	})
 }
 

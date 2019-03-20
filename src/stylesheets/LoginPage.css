@@ -36,7 +36,7 @@
 	font-family: 'Bungee Inline', cursive;
 	letter-spacing: 5px;
 	font-size: 60px;
-	color: antiquewhite;
+	color: orange;
 	vertical-align: top;
 	height: 12px;
 }
@@ -55,7 +55,7 @@
 	font-family: 'Bungee Inline', cursive;
 	letter-spacing: 5px;
 	font-size: 30px;
-	color: antiquewhite;
+	color: orange;
 }
 
 .ui.inverted.teal.button {

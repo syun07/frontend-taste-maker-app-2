@@ -43,7 +43,7 @@ class LoginPage extends Component {
 					localStorage.setItem("token", payload.jwt)
 
 					getUserInfo(payload.user.id).then((data) => this.props.setUserInfo(data))
-					this.props.changeLogin()
+					this.props.changeLogin(true)
 			} else {
 				alert("INVALID LOGIN!")
 			}

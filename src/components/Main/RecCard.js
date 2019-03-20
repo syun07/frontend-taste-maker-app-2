@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Card, Label } from 'semantic-ui-react';
+import { Card, Label, Button } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
 class RecCard extends Component {
+
+	handleNameClick = (name) => {
+		console.log(name)
+	}
 
 	render() {	
 		const { Name, Type, wTeaser } = this.props.rec
@@ -76,22 +80,29 @@ class RecCard extends Component {
 		return (
 			<Card id='rec-card'>
 				<Card.Content>
+					{tagType}
 					<br/><br/>
 					<Card.Header className='result-name'>{Name}</Card.Header>
-					<Card.Description id='small-desc'>Same Wavelength As {this.props.searchedName}</Card.Description>
-					{tagType}
-					<br/>
-					<Card.Description>
-						<p>{wTeaser}</p>
-					</Card.Description>
-				</Card.Content>
 
-				<Label
-					className='rec-to-wl'
-					as='a' color='black'
-					onClick={null}>
-					<i className='heartbeat icon' />ADD TO WAVELENGTH
-				</Label>
+					<Label
+						className='rec-to-wl'
+						as='a' color='black'
+						onClick={null}>
+						<i className='heartbeat icon' />ADD TO WAVELENGTH
+					</Label>
+
+					<Card.Description>
+						<p className='card-description'>{wTeaser.slice(0, 500)}</p>
+					</Card.Description>
+					<br/>
+
+					<Button
+						inverted
+						className='see-more'
+						color={tagType.props.color}>
+						See More
+					</Button>
+				</Card.Content>
 			</Card>
 		)
 	}

@@ -22,9 +22,9 @@ export const goBack = () => {
 }
 
 // change login status to true if login is authenticated
-export const changeLogin = () => {
+export const changeLogin = (boo) => {
 	return {
-		type: 'CHANGE_LOGIN'
+		type: 'CHANGE_LOGIN', boo
 	}
 }
 
@@ -50,6 +50,12 @@ export const changePage = clicked => {
 export const saveSearch = query => {
 	return {
 		type: 'SAVE_SEARCH', query
+	}
+}
+
+export const clearSearch = () => {
+	return {
+		type: 'CLEAR_SEARCH'
 	}
 }
 

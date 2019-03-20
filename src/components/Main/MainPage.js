@@ -10,7 +10,7 @@ import SearchIndResults from '../Main/SearchIndResults';
 import MyWL from './MyWL';
 import MyWLGreeting from './MyWLGreeting'
 
-import { changePage, handleResult, clearSearchType } from '../../actions/allActions'
+import { changePage, clearSearch, getRecData, handleResult, clearSearchType, changeLogin, goBack } from '../../actions/allActions'
 
 import { Container, Menu } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
@@ -23,6 +23,12 @@ class MainPage extends Component {
 		this.state = {
 			activeItem: 'home'
 		}
+	}
+
+	logOut = () => {
+		this.props.changeLogin(false)
+		this.props.goBack()
+		localStorage.clear()
 	}
 
 	// changes activeItem state & props 
@@ -56,7 +62,8 @@ class MainPage extends Component {
 					<Menu.Item
 						name='LOG OUT'
 						active={this.state.activeItem === 'logout'}
-						onClick={() => this.handleItemClick('logout')} />
+						onClick={this.logOut}
+						/>
 				</Menu.Menu>
 			</Menu>
 
@@ -83,10 +90,12 @@ class MainPage extends Component {
 		
 		if (this.props.activeItem === 'home') {
 			this.props.handleResult(false)
+			this.props.clearSearch()
+			this.props.getRecData([])
 			page = homePage
 		} else if (this.props.activeItem === 'explore') {
+			this.props.clearSearchType()
 			this.props.handleResult(false)
-			this.props.clearSearchType('')
 			page = searchIndPage
 		} else if (this.props.activeItem === 'wavelength') {
 			page = wavelength
@@ -105,8 +114,9 @@ class MainPage extends Component {
 
 const mapStateToProps = state => {
 	return ({
-		activeItem: state.activeItem
+		activeItem: state.activeItem,
+		result: state.result
 	})
 }
 
-export default connect(mapStateToProps, { changePage, handleResult, clearSearchType })(MainPage);
+export default connect(mapStateToProps, { getRecData, clearSearch, changePage, handleResult, clearSearchType, changeLogin, goBack })(MainPage);

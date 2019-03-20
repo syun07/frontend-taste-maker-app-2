@@ -15,7 +15,7 @@ class SearchIndividual extends Component {
 	}
 
 	handleSearch = (query, genre) => {
-		if (query === '' || query === ' ') {
+		if (query === '' || query.length < 2) {
 			this.props.handleResult(false)
 		} else {
 			fetchSearch(query, genre)
@@ -34,34 +34,8 @@ class SearchIndividual extends Component {
 
 	render() {
 		return (
-		<Container className='search-input-container'>
-			<h4>SEARCH ALL</h4>
-			<div>
-				<Button disabled color='red'>
-						<i className='music icon' /> Music
-					</Button>
-
-					<Button disabled color='orange'>
-						<i className='film icon' /> Movies
-					</Button>
-
-					<Button disabled color='yellow'>
-						<i className='tv icon' /> Shows
-					</Button>
-
-					<Button disabled color='green'>
-						<i className='podcast icon' /> Podcasts
-					</Button>
-
-					<Button disabled color='blue'>
-						<i className='book icon' /> Books
-					</Button>
-
-					<Button disabled color='purple'>
-						<i className='gamepad icon' /> Games
-					</Button>
-				</div>
-				<h4>FOR MORE INFORMATION</h4>
+			<Container className='search-input-container'>
+				<h4>SEARCH ANYTHING</h4>
 				<Input id='search'
 					placeholder='SEARCH ANY SONG/ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'
 					onChange={(event) => this.handleChange(event)} />

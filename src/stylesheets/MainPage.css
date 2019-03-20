@@ -9,7 +9,8 @@
 
 /* main page */
 .ui.container.main-container {
-	margin-top: 1em;
+	margin-top: 0.5em;
+	width: 100%;
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -20,7 +21,7 @@
 #navBar {
 	background-color: lightsteelblue;
 	padding: 12px;
-	width: 100%;
+	width: 60%;
 	height: 3em;
 }
 
@@ -35,6 +36,7 @@
 	flex-direction: column;
 	align-items: center;
 	height: 90vh;
+	width: 100%;
 }
 
 /* search input container */
@@ -45,6 +47,7 @@
 	text-align: center;
 	letter-spacing: 2px;
 	color: white;
+	height: fit-content;
 }
 
 .ui.input #search {
@@ -54,14 +57,13 @@
 
 /* search results for explore page */
 .ui.container .searched-result-container {
-	margin-top: 2em;
 	display: flex;
 	flex-direction: column;
 	text-align: center;
 	align-items: center;
 	overflow-y: scroll; 
-	border: solid 0.5px aliceblue;
-	height: 70vh;
+	width: 100%;
+	height: 100%;
 	border-radius: 45px;
 	padding: 1em;
 	color: white;
@@ -73,8 +75,8 @@
 
 .type-tag {
 	position: absolute;
-	right: 40em;
-	top: -4em;
+	left: -23.7em;
+	top: 4.2em;
 }
 
 .result-name {
@@ -85,7 +87,13 @@
 	letter-spacing: 2px;
 	color: white !important;
 	border-radius: 10px;
-	margin-bottom: -6px;
+}
+
+.result-messages {
+	text-transform: uppercase;
+	width: auto;
+	letter-spacing: 2px;
+
 }
 
 .result-desc {
@@ -94,10 +102,11 @@
 	color: black;
 	letter-spacing: 0.2px;
 	border-radius: 10px;
+	width: 650px;
 }
 
 .add-to-wl {
-	right: 35em;
+	right: 36em;
 }
 
 #rec-card {
@@ -114,29 +123,35 @@
 }
 
 .rec-to-wl {
-	margin:10px !important
+	margin: 10px !important;
 }
 
 /* search results for home page */
 .ui.container #rec-cards-container {
-	margin-top: 2em;
 	display: flex;
 	flex-flow: row wrap;
 	text-align: center;
 	justify-content: center;
 	align-self: center;
 	overflow-y: scroll;
-	border: solid 0.5px aliceblue;
+	width: 85%;
 	height: 70vh;
-	border-radius: 45px;
-	padding: 2em;
 }
-
 
 #small-desc {
 	font-size: 10px;
 }
 
-#rec-greeting {
+.card-description {
+	font-size: 11px;
+}
+
+.see-more {
 	position: absolute;
+	bottom: 15px;
+	left: 95px;
+}
+
+#result-name-desc {
+	background-color: black;
 }
