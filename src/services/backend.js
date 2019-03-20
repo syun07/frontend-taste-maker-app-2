@@ -31,7 +31,7 @@ export const addNewUser = (name, password) => {
 	
 ///////////// FETCH /////////////
 
-export const fetchSearch = (query, genre='') => {
+export const fetchSearch = (query, genre = '') => {
 	return fetch(`${LOCALAPI}/searched-wavelength`, {
 		headers: new Headers({
 			'Content-Type': 'application/json; charset=utf-8',

@@ -4,7 +4,7 @@ import { fetchSearch } from '../../services/backend'
 import { saveSearch, getSearchedData, getRecData, handleResult, clearSearchType } from '../../actions/allActions'
 
 
-import { Container, Input, Button } from 'semantic-ui-react';
+import { Container, Input } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
 class SearchIndividual extends Component {

@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { changePage, getSearchedData, getRecData } from '../../actions/allActions'
+import { fetchSearch } from '../../services/backend';
+
 import { Card, Label, Button } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
 class RecCard extends Component {
 
 	handleNameClick = (name) => {
-		console.log(name)
+		this.props.changePage('explore')
+		this.seeMoreFetch(name.Name)
+	}
+
+	seeMoreFetch = (name) => {
+		debugger
+		fetchSearch(name).then(data => {
+			this.props.getSearchedData(data.Similar.Info[0])
+			this.props.getRecData(data.Similar.Results)
+		})
 	}
 
 	render() {	
@@ -82,7 +94,8 @@ class RecCard extends Component {
 				<Card.Content>
 					{tagType}
 					<br/><br/>
-					<Card.Header className='result-name'>{Name}</Card.Header>
+					<Card.Header
+						className='result-name'>{Name}</Card.Header>
 
 					<Label
 						className='rec-to-wl'
@@ -99,7 +112,8 @@ class RecCard extends Component {
 					<Button
 						inverted
 						className='see-more'
-						color={tagType.props.color}>
+						color={tagType.props.color}
+						onClick={() => this.handleNameClick({Name})}>
 						See More
 					</Button>
 				</Card.Content>
@@ -110,8 +124,8 @@ class RecCard extends Component {
 
 const mapStateToProps = state => {
 	return ({
-		searchedName: state.searchedData.Name
+
 	})
 }
 
-export default connect(mapStateToProps)(RecCard);
+export default connect(mapStateToProps, { changePage, getSearchedData, getRecData })(RecCard);
