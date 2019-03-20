@@ -6,16 +6,17 @@ import { fetchSearch } from '../../services/backend';
 
 import { Card, Label, Button } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
+const removeAccents = require('../../../node_modules/remove-accents')
 
 class RecCard extends Component {
 
 	handleNameClick = (name) => {
 		this.props.changePage('explore')
-		this.seeMoreFetch(name.Name)
+		const inputString = name.Name
+		this.seeMoreFetch(removeAccents(inputString))
 	}
 
 	seeMoreFetch = (name) => {
-		debugger
 		fetchSearch(name).then(data => {
 			this.props.getSearchedData(data.Similar.Info[0])
 			this.props.getRecData(data.Similar.Results)
