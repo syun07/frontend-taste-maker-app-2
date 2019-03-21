@@ -24,7 +24,7 @@ class SearchInput extends Component {
 	}
 
 	handleSearch = (query, genre) => {
-		if (query === '' || query.length < 2) {
+		if (query === '' || this.props.userSearch.length < 2) {
 			this.props.handleResult(false)
 		} else {
 			fetchSearch(query, genre)

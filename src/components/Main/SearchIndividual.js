@@ -45,7 +45,6 @@ class SearchIndividual extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log(state)
 	return ({
 		activeItem: state.activeItem,
 		userSearch: state.userSearch,

@@ -4,8 +4,11 @@ import YouTube from 'react-youtube';
 
 import { Container, Label } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
+import { addToWavelength } from '../../actions/allActions'
+
 
 class SearchIndResults extends Component {
+
 	render() {
 		const opts = {
 			height: '400',
@@ -79,7 +82,7 @@ class SearchIndResults extends Component {
 		}	
 
 		return (
-			this.props.result === false ? 
+			this.props.result === false || this.props.userSearch === '' ? 
 				
 			<Container className='searched-result-container'>
 				<br/>
@@ -93,8 +96,7 @@ class SearchIndResults extends Component {
 
 				<Label
 					className='add-to-wl'
-					as='a' color='black'
-					onClick={null}>
+					as='a' color='black'>
 					<i className='heartbeat icon' />ADD TO WAVELENGTH
 				</Label>
 
@@ -114,11 +116,14 @@ class SearchIndResults extends Component {
 }
 
 const mapStateToProps = state => {
+	console.log(state)
 	return ({
 		result: state.result,
+		userSearch: state.userSearch,
 		searchedData: state.searchedData,
-		recData: state.recData
+		recData: state.recData,
+		usersWavelength: state.usersWavelength
 	})
 }
 
-export default connect(mapStateToProps)(SearchIndResults)
+export default connect(mapStateToProps, { addToWavelength })(SearchIndResults)

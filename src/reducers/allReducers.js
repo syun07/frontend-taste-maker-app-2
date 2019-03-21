@@ -18,8 +18,8 @@ let initialState = {
 	// don't show info for invalid fetches
 	result: false,
 	
-	// saved wavelengths
-	userTastes: []
+	
+	wavelength: {}
 }
 
 export default (state = initialState, action) => {
@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
 		case 'CHANGE_LOGIN':
 			return { ...state, loginSuccess: action.boo }
 		case 'SET_USER_INFO':
-			return { ...state, userData: action.data, userTastes: action.data.tastes }
+			return { ...state, userData: action.data }
 		
 		// MAIN PAGE NAV
 		case 'CHANGE_PAGE':
@@ -65,6 +65,9 @@ export default (state = initialState, action) => {
 		// NO INFO FOR INVALID SEARCHES
 		case 'HANDLE_RESULT':
 			return { ...state, result: action.result }
+		
+		case 'ADD_TO_WL':
+			return { ...state, wavelength: action.wavelength }
 	
 		default:
 			return state

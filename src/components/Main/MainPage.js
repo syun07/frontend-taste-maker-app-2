@@ -7,8 +7,7 @@ import SearchResults from '../Main/SearchResults';
 import SearchIndividual from '../Main/SearchIndividual';
 import SearchIndResults from '../Main/SearchIndResults';
 
-import MyWL from './MyWL';
-import MyWLGreeting from './MyWLGreeting'
+import MyWLContainer from './MyWLContainer';
 
 import { changePage, clearSearch, getRecData, handleResult, clearSearchType, changeLogin, goBack } from '../../actions/allActions'
 
@@ -81,8 +80,7 @@ class MainPage extends Component {
 		
 		const wavelength =
 			<Container className='search-page-container'>
-				<MyWLGreeting />
-				<MyWL />
+				<MyWLContainer/>
 			</Container>
 		
 

@@ -98,5 +98,11 @@ export const handleResult = result => {
 	}
 }
 
+export const addToWavelength = wavelength => {
+	return {
+		type: 'ADD_TO_WAVELENGTH', wavelength
+	}
+}
+
 
 

@@ -6,14 +6,14 @@ import { fetchSearch } from '../../services/backend';
 
 import { Card, Label, Button } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
-const removeAccents = require('../../../node_modules/remove-accents')
+let removeAccents = require('../../../node_modules/remove-accents')
 
 class RecCard extends Component {
 
 	handleNameClick = (name) => {
 		this.props.changePage('explore')
-		const inputString = name.Name
-		this.seeMoreFetch(removeAccents(inputString))
+		const inputString = removeAccents(name.Name)
+		this.seeMoreFetch(inputString)
 	}
 
 	seeMoreFetch = (name) => {
@@ -125,8 +125,8 @@ class RecCard extends Component {
 
 const mapStateToProps = state => {
 	return ({
-
+		usersWavelength: state.usersWavelength
 	})
 }
 
-export default connect(mapStateToProps, { changePage, getSearchedData, getRecData })(RecCard);
+export default connect(mapStateToProps, { changePage, getSearchedData, getRecData, addToWavelength })(RecCard);
