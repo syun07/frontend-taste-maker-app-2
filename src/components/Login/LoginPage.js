@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { clickLogin, clickSignUp, changeLogin, goBack, setUserInfo } from '../../actions/allActions';
-import { addNewUser, getAuthToken, getUserInfo,  } from '../../services/backend';
+import { addNewUser, getAuthToken, getUserInfo } from '../../services/backend';
 
 import { Form, Button } from 'semantic-ui-react';
 import '../../stylesheets/LoginPage.css';

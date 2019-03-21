@@ -17,9 +17,6 @@ let initialState = {
 
 	// don't show info for invalid fetches
 	result: false,
-	
-	
-	wavelength: {}
 }
 
 export default (state = initialState, action) => {

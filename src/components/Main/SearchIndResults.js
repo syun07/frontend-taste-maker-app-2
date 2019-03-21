@@ -4,7 +4,7 @@ import YouTube from 'react-youtube';
 
 import { Container, Label } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
-import { addToWavelength } from '../../actions/allActions'
+import { postFavorite } from '../../services/backend';
 
 
 class SearchIndResults extends Component {
@@ -96,7 +96,8 @@ class SearchIndResults extends Component {
 
 				<Label
 					className='add-to-wl'
-					as='a' color='black'>
+					as='a' color='black'
+					onClick={() => postFavorite(this.props.searchedData, this.props.userData.id)}>
 					<i className='heartbeat icon' />ADD TO WAVELENGTH
 				</Label>
 
@@ -122,8 +123,9 @@ const mapStateToProps = state => {
 		userSearch: state.userSearch,
 		searchedData: state.searchedData,
 		recData: state.recData,
-		usersWavelength: state.usersWavelength
+		usersWavelength: state.usersWavelength,
+		userData: state.userData
 	})
 }
 
-export default connect(mapStateToProps, { addToWavelength })(SearchIndResults)
+export default connect(mapStateToProps)(SearchIndResults)

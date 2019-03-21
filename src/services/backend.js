@@ -29,7 +29,7 @@ export const addNewUser = (name, password) => {
 	}
 
 	
-///////////// FETCH /////////////
+///////////// SEND QUERY + GENRE TO BACKEND FOR FETCH /////////////
 
 export const fetchSearch = (query, genre = '') => {
 	return fetch(`${LOCALAPI}/searched-wavelength`, {
@@ -41,3 +41,27 @@ export const fetchSearch = (query, genre = '') => {
 			method: 'GET'
 	}).then(res => res.json())
 }
+
+
+///////////// POST TO FAVORITES /////////////
+
+export const postFavorite = (wavelength, userID) => {
+	console.log(wavelength)
+	debugger
+	return fetch(`${LOCALAPI}/tastes`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json'
+		},
+		body: JSON.stringify({
+			userID: userID,
+			name: wavelength.Name,
+			teaser: wavelength.wTeaser,
+			wUrl: wavelength.wUrl,
+			yUrl: wavelength.yUrl,
+			yID: wavelength.yID
+		})
+	}).then(res => res.json())
+}
+

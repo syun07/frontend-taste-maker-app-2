@@ -129,4 +129,4 @@ const mapStateToProps = state => {
 	})
 }
 
-export default connect(mapStateToProps, { changePage, getSearchedData, getRecData, addToWavelength })(RecCard);
+export default connect(mapStateToProps, { changePage, getSearchedData, getRecData })(RecCard);
