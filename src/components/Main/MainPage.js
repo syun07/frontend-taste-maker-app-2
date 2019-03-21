@@ -9,7 +9,8 @@ import SearchIndResults from '../Main/SearchIndResults';
 
 import MyWLContainer from './MyWLContainer';
 
-import { changePage, clearSearch, getRecData, handleResult, clearSearchType, changeLogin, goBack } from '../../actions/allActions'
+import { changePage, clearSearch, getRecData, handleResult, changeLogin, goBack, addToFavorites } from '../../actions/allActions'
+import { getFavorites } from '../../services/backend'
 
 import { Container, Menu } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
@@ -88,6 +89,7 @@ class MainPage extends Component {
 		
 		if (this.props.activeItem === 'home') {
 			page = homePage
+			getFavorites(this.props.userData.id).then(data => this.props.addToFavorites(data.tastes))
 		} else if (this.props.activeItem === 'explore') {
 			page = searchIndPage
 		} else if (this.props.activeItem === 'wavelength') {
@@ -106,10 +108,12 @@ class MainPage extends Component {
 }
 
 const mapStateToProps = state => {
+	console.log(state)
 	return ({
 		activeItem: state.activeItem,
-		result: state.result
+		result: state.result,
+		userData: state.userData
 	})
 }
 
-export default connect(mapStateToProps, { getRecData, clearSearch, changePage, handleResult, clearSearchType, changeLogin, goBack })(MainPage);
+export default connect(mapStateToProps, { getRecData, clearSearch, changePage, handleResult, changeLogin, goBack, addToFavorites })(MainPage);

@@ -55,6 +55,7 @@ export const postFavorite = (wavelength, userId) => {
 		body: JSON.stringify({
 			userID: userId,
 			name: wavelength.Name,
+			genre: wavelength.Type,
 			teaser: wavelength.wTeaser,
 			wUrl: wavelength.wUrl,
 			yUrl: wavelength.yUrl,
@@ -70,4 +71,18 @@ export const getFavorites = (userId) => {
 			'Content-Type': 'application/json'
 		}
 	}).then(res => res.json())
+}
+
+export const deleteFromFavorites = (userId, tasteId) => {
+	return fetch(`${LOCALAPI}/remove-wavelength`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': localStorage.getItem('token')
+		},
+		body: JSON.stringify({
+			user_id: userId,
+			taste_id: tasteId
+		})
+	})
 }

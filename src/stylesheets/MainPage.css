@@ -155,3 +155,15 @@
 #result-name-desc {
 	background-color: black;
 }
+
+/* search results for home page */
+.ui.container #my-wl-container {
+	display: flex;
+	flex-flow: row wrap;
+	text-align: center;
+	justify-content: center;
+	align-self: center;
+	overflow-y: scroll;
+	width: 90%;
+	height: 90vh;
+}

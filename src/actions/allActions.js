@@ -66,12 +66,6 @@ export const handleTypeChange = genre => {
 	}
 }
 
-// clear search type so it doesn't persist on next search
-export const clearSearchType = () => {
-	return {
-		type: 'CLEAR_SEARCH_TYPE'
-	}
-}
 
 //////////////// VALID FETCHED DATA ////////////////
 
@@ -98,6 +92,10 @@ export const handleResult = result => {
 	}
 }
 
+
+//////////////// FAVORITES ////////////////
+
+// adding favorites
 export const addToFavorites = wavelength => {
 	return {
 		type: 'ADD_TO_FAVORITES', wavelength

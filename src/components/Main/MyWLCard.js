@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { changePage, getSearchedData, getRecData } from '../../actions/allActions'
-import { fetchSearch } from '../../services/backend';
+import { changePage, getSearchedData, getRecData } from '../../actions/allActions';
+// import { fetchSearch } from '../../services/backend';
 
-import { Card, Label, Button } from 'semantic-ui-react';
+
+import { Card, Button, Label } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
-let removeAccents = require('../../../node_modules/remove-accents')
+// let removeAccents = require('../../../node_modules/remove-accents')
 
-class RecCard extends Component {
 
-	handleNameClick = (name) => {
-		// this.props.changePage('explore')
-		const inputString = removeAccents(name.Name)
-		this.seeMoreFetch(inputString)
-	}
+class MyWLCard extends Component {
 
-	seeMoreFetch = (name) => {
-		fetchSearch(name).then(data => {
-			this.props.getSearchedData(data.Similar.Info[0])
-			this.props.getRecData(data.Similar.Results)
-		})
-	}
+// 	handleClick = () => {
+// 		let favWL
+// 		if (this.props.wavelength !== []) {
+// 			 favWL = this.props.wavelength.find(fav => fav. === this.props.movieInfo.id)
+// 		}
 
-	render() {	
-		const { Name, Type, wTeaser } = this.props.rec
+// 		deleteFavorite(this.props.currentUser, favedMovie.id)
+// 		.then(() => getFavorites(this.props.currentUser))
+// 		.then(data => this.props.setUserFavorites(data.movies))
+//  } 
+
+
+	render() {
+	
+		const { name, genre, teaser } = this.props.wave
 
 		const musicTag =
 		<Label id='rec-tag' as='a' color='red' image>
@@ -64,7 +66,7 @@ class RecCard extends Component {
 		
 		let tagType
 
-		switch(Type) {
+		switch(genre) {
 			case 'music':
 				tagType = musicTag
 				break;
@@ -90,44 +92,29 @@ class RecCard extends Component {
 				return null;
 		}	
 
-		// const addBtn = 
-		// 	<Label
-		// 		className='rec-to-wl'
-		// 		as='a' color='black'
-		// 		onClick={null}>
-		// 		<i className='heartbeat icon' />ADD TO WAVELENGTH
-		// 	</Label>
-		
-		// const removeBtn = 
-		// 	<Label
-		// 		className='rec-to-wl'
-		// 		as='a' color='black'
-		// 		onClick={null}>
-		// 		<i className='heartbeat icon' />ADD TO WAVELENGTH
-		// 	</Label>
-	
-
-		// let addOrRemove;
-
-		return (
+		return ( 
+			// show favorites by type
 			<Card id='rec-card'>
 				<Card.Content>
 					{tagType}
 					<br/><br/>
-					<Card.Header className='result-name'>{Name}</Card.Header>
+					<Card.Header className='result-name'>{name}</Card.Header>
 
-					{/* {addOrRemove} */}
+					<Label
+						className='rec-to-wl'
+						as='a' color='black'
+						onClick={null}>
+						<i className='heartbeat icon' />REMOVE FROM WAVELENGTH
+					</Label>
 
 					<Card.Description>
-						<p className='card-description'>{wTeaser.slice(0, 500)}</p>
+						<p className='card-description'>{teaser.slice(0, 500)}</p>
 					</Card.Description>
-					<br/>
 
 					<Button
 						inverted
 						className='see-more'
-						color={tagType.props.color}
-						onClick={() => this.handleNameClick({Name})}>
+						color={tagType.props.color}>
 						See More
 					</Button>
 				</Card.Content>
@@ -142,4 +129,5 @@ const mapStateToProps = state => {
 	})
 }
 
-export default connect(mapStateToProps, { changePage, getSearchedData, getRecData })(RecCard);
+
+export default connect(mapStateToProps, { changePage, getSearchedData, getRecData })(MyWLCard);

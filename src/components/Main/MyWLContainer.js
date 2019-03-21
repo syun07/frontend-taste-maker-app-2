@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import MyWLCard from '../Main/MyWLCard';
+
 import { Container } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
 class MyWavelength extends Component {
 	render() {
-		// const mappedFavorites = this.props.wavelength.map(wave =>
-		// )
+		const mappedFavorites = this.props.wavelength.map(wave =>
+			<MyWLCard
+				key={wave.id}
+				wave={wave}
+			/>	
+		)
 
 		return ( 
-			<Container className='searched-result-container'>
-				<h4>{this.props.userData.name}'s Wavelength</h4>
-				{/* {mappedFavorites} */}
+			<Container id='my-wl-container'>
+				{mappedFavorites}
 			</Container>
 		)
 	}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSearch } from '../../services/backend'
-import { saveSearch, getSearchedData, getRecData, handleResult, clearSearchType } from '../../actions/allActions'
+import { saveSearch, getSearchedData, getRecData, handleResult } from '../../actions/allActions'
 
 
 import { Container, Input } from 'semantic-ui-react';
@@ -52,4 +52,4 @@ const mapStateToProps = state => {
 	})
 }
 
-export default connect(mapStateToProps, { saveSearch, getSearchedData, getRecData, handleResult, clearSearchType })(SearchIndividual)
+export default connect(mapStateToProps, { saveSearch, getSearchedData, getRecData, handleResult })(SearchIndividual)
