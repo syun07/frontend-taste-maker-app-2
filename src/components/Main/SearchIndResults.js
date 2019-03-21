@@ -4,7 +4,8 @@ import YouTube from 'react-youtube';
 
 import { Container, Label } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
-import { postFavorite } from '../../services/backend';
+import { postFavorite, getFavorites } from '../../services/backend';
+import { addToFavorites } from '../../actions/allActions'
 
 
 class SearchIndResults extends Component {
@@ -97,7 +98,11 @@ class SearchIndResults extends Component {
 				<Label
 					className='add-to-wl'
 					as='a' color='black'
-					onClick={() => postFavorite(this.props.searchedData, this.props.userData.id)}>
+					onClick=
+					{() => postFavorite(this.props.searchedData, this.props.userData.id)
+						.then(() => getFavorites(this.props.userData.id))
+						.then(data => this.props.addToFavorites(data.tastes))}>
+					
 					<i className='heartbeat icon' />ADD TO WAVELENGTH
 				</Label>
 
@@ -123,9 +128,9 @@ const mapStateToProps = state => {
 		userSearch: state.userSearch,
 		searchedData: state.searchedData,
 		recData: state.recData,
-		usersWavelength: state.usersWavelength,
-		userData: state.userData
+		userData: state.userData,
+		wavelength: state.wavelength
 	})
 }
 
-export default connect(mapStateToProps)(SearchIndResults)
+export default connect(mapStateToProps, { addToFavorites })(SearchIndResults)

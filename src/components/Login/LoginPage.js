@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { clickLogin, clickSignUp, changeLogin, goBack, setUserInfo } from '../../actions/allActions';
-import { addNewUser, getAuthToken, getUserInfo } from '../../services/backend';
+import { addNewUser, getAuthToken, getUserInfo, getFavorites } from '../../services/backend';
 
 import { Form, Button } from 'semantic-ui-react';
 import '../../stylesheets/LoginPage.css';
@@ -44,6 +44,7 @@ class LoginPage extends Component {
 
 					getUserInfo(payload.user.id).then((data) => this.props.setUserInfo(data))
 					this.props.changeLogin(true)
+					// getFavorites(payload.user.id)
 			} else {
 				alert("INVALID LOGIN!")
 			}

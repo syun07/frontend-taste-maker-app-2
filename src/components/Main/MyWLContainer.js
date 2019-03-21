@@ -6,17 +6,23 @@ import '../../stylesheets/MainPage.css'
 
 class MyWavelength extends Component {
 	render() {
+		// const mappedFavorites = this.props.wavelength.map(wave =>
+		// )
+
 		return ( 
 			<Container className='searched-result-container'>
 				<h4>{this.props.userData.name}'s Wavelength</h4>
+				{/* {mappedFavorites} */}
 			</Container>
 		)
 	}
 }
 
 const mapStateToProps = state => {
+	console.log(state)
 	return ({
-		userData: state.userData
+		userData: state.userData,
+		wavelength: state.wavelength
 	})
 }
 

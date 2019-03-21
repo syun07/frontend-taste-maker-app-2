@@ -17,6 +17,8 @@ let initialState = {
 
 	// don't show info for invalid fetches
 	result: false,
+
+	wavelength: []
 }
 
 export default (state = initialState, action) => {
@@ -63,8 +65,8 @@ export default (state = initialState, action) => {
 		case 'HANDLE_RESULT':
 			return { ...state, result: action.result }
 		
-		case 'ADD_TO_WL':
-			return { ...state, wavelength: action.wavelength }
+		case 'ADD_TO_FAVORITES':
+			return { ...state, wavelength: action.wavelength}
 	
 		default:
 			return state

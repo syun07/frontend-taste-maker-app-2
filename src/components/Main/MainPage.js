@@ -80,7 +80,7 @@ class MainPage extends Component {
 		
 		const wavelength =
 			<Container className='search-page-container'>
-				<MyWLContainer/>
+				<MyWLContainer />
 			</Container>
 		
 

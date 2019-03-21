@@ -45,9 +45,7 @@ export const fetchSearch = (query, genre = '') => {
 
 ///////////// POST TO FAVORITES /////////////
 
-export const postFavorite = (wavelength, userID) => {
-	console.log(wavelength)
-	debugger
+export const postFavorite = (wavelength, userId) => {
 	return fetch(`${LOCALAPI}/tastes`, {
 		method: 'POST',
 		headers: {
@@ -55,7 +53,7 @@ export const postFavorite = (wavelength, userID) => {
 			Accept: 'application/json'
 		},
 		body: JSON.stringify({
-			userID: userID,
+			userID: userId,
 			name: wavelength.Name,
 			teaser: wavelength.wTeaser,
 			wUrl: wavelength.wUrl,
@@ -65,3 +63,11 @@ export const postFavorite = (wavelength, userID) => {
 	}).then(res => res.json())
 }
 
+export const getFavorites = (userId) => {
+	return fetch(`${LOCALAPI}/users/${userId}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}).then(res => res.json())
+}

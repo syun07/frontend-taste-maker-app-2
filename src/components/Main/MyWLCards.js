@@ -5,14 +5,16 @@ import '../../stylesheets/MainPage.css'
 
 class MyWavelength extends Component {
 	render() {
+	
+		
 		return ( 
 			// show favorites by type
 			<Container>
+				
 			</Container>
 		)
 	}
 }
 
 
-
-export default MyWavelength
+export default MyWavelength;

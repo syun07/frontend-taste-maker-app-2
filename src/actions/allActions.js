@@ -35,8 +35,6 @@ export const setUserInfo = data => {
 	}
 }
 
-export const 
-
 //////////////// MAIN PAGE NAV ////////////////
 
 // change what's rendered in main container based on navBar click
@@ -100,11 +98,8 @@ export const handleResult = result => {
 	}
 }
 
-export const addToWavelength = wavelength => {
+export const addToFavorites = wavelength => {
 	return {
-		type: 'ADD_TO_WAVELENGTH', wavelength
+		type: 'ADD_TO_FAVORITES', wavelength
 	}
 }
-
-
-
