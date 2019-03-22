@@ -9,7 +9,6 @@
 
 .button-page-container {
 	display: flex;
-	justify-content: center;
 	position: absolute;
 	top: 25%;
 	flex-direction: column;
@@ -18,7 +17,6 @@
 
 .title-container {
 	display: flex;
-	justify-content: center;
 	flex-direction: column;
 	align-items: center;
 	
@@ -28,62 +26,45 @@
 	font-family: 'Lobster', cursive;
 	color:ghostwhite;
 	font-size: 45px;
-	vertical-align: top;
 	height: 12px;
+	letter-spacing: 1px;
 }
 
 .title-two {
 	font-family: 'Bungee Inline', cursive;
-	letter-spacing: 5px;
+	letter-spacing: 8px;
 	font-size: 60px;
-	color: orange;
-	vertical-align: top;
+	color: rosybrown;
 	height: 12px;
-}
-
-.tagline {
-	font-style: italic;
-	color: ghostwhite;
 }
 
 .open-page-btns {
 	position: absolute;
-	top: 300%;
+	top: 250%;
 }
 
 .labels {
 	font-family: 'Bungee Inline', cursive;
 	letter-spacing: 5px;
 	font-size: 30px;
-	color: orange;
+	color: rosybrown;
 }
 
-.ui.inverted.teal.button {
+.ui.inverted.teal.button, .ui.teal.button {
 	letter-spacing: 4px;
-	margin-right: 16px;
-}
-
-.ui.teal.button {
-	letter-spacing: 4px;
-	margin-left: 16px;
 }
 
 .ui.form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	top: 28%;
-	width: 1000px;
+	top: 25%;
 }
 
 input {
 	text-align: center;
 	width: 18em !important;
-	height: 2.5em !important;
-}
-
-.ui.form .title {
-	font-size: 30px;
+	height: 2.8em !important;
 }
 
 #back-btn {

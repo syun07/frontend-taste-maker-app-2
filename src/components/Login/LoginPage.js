@@ -59,15 +59,13 @@ class LoginPage extends Component {
 				</div>
 			
 				<div className='open-page-btns'>
-					<Button inverted color='teal'
-						onClick={this.props.clickLogin}>
-						LOGIN
-					</Button>
-
-					<Button color='teal'
-						onClick={this.props.clickSignUp}>
-						SIGN UP
-					</Button>
+					<Button.Group>
+						<Button inverted color='teal'
+							onClick={this.props.clickLogin}>LOGIN</Button>
+						<Button.Or />
+						<Button color='teal'
+							onClick={this.props.clickSignUp}>SIGNUP</Button>
+					</Button.Group>
 				</div>
 			</div>
 
