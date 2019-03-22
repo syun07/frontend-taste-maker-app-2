@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { changePage, getSearchedData, getRecData } from '../../actions/allActions'
+import { changePage, getSearchedData, getRecData, addToFavorites } from '../../actions/allActions'
 
 import { Card, Label, Button, Modal, Embed } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
+import { postFavorite, getFavorites } from '../../services/backend';
 
 class RecCard extends Component {
 	
@@ -19,7 +20,7 @@ class RecCard extends Component {
 		const { Name, Type, wTeaser, yID, wUrl } = this.props.rec
 
 		const musicTag =
-		<Label id='rec-tag' as='a' color='red' ribbon>
+			<Label id='rec-tag' as='a' color='red' ribbon>
 				<i className='music icon' />MUSIC</Label>
 		
 		const movieTag =
@@ -73,12 +74,15 @@ class RecCard extends Component {
 		
 		const addBtn = 
 			<Label className='rec-to-wl'
-				as='a' color='olive' onClick={null}>
+				as='a' color='olive'
+				onClick={() => postFavorite(this.props.rec, this.props.userData.id)
+					.then(() => getFavorites(this.props.userData.id))
+					.then(data => this.props.addToFavorites(data.tastes))}>
 				<i className='add icon' />ADD</Label>
 		
 		const removeBtn = 
 			<Label className='rec-to-wl'
-				as='a' color='black' onClick={null}>
+				as='a' color='black' onClick={() => this.handleRemove}>
 				<i className='remove icon'/>REMOVE</Label>
 
 		let addOrRemove = addBtn;
@@ -108,7 +112,6 @@ class RecCard extends Component {
 						
 						<Modal.Header id='modal-header'>						
 							<h3 id='center-name'>{Name}</h3>
-							
 						</Modal.Header>
 
 						<Modal.Content scrolling>
@@ -135,8 +138,9 @@ class RecCard extends Component {
 const mapStateToProps = state => {
 	return ({
 		wavelength: state.wavelength,
-		recData: state.recData
+		recData: state.recData,
+		userData: state.userData
 	})
 }
 
-export default connect(mapStateToProps, { changePage, getSearchedData, getRecData })(RecCard);
+export default connect(mapStateToProps, { changePage, getSearchedData, getRecData, addToFavorites })(RecCard);
