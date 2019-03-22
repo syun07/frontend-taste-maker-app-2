@@ -10,6 +10,7 @@ class SearchResults extends Component {
 		const mappedResults = this.props.recData.map((rec, index) =>
 			<RecCard
 				key={index}
+				id={index}
 				rec={rec}
 			/>
 		)

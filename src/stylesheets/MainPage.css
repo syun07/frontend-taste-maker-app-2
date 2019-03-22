@@ -19,15 +19,20 @@
 
 /* nav bar */
 #navBar {
-	background-color: lightsteelblue;
+	/* background-color: lightsteelblue; */
 	padding: 12px;
-	width: 60%;
+	width: 75%;
 	height: 3em;
 }
 
 .ui.secondary.menu .item {
 	color: white;
 	letter-spacing: 2px;
+}
+
+.ui.secondary.menu .active.item {
+	background: lightsteelblue !important;
+	color: white !important;
 }
 
 /* search page */
@@ -110,20 +115,21 @@
 }
 
 #rec-card {
-	height: 30em;
+	height: 28em;
 	margin: 15px;
 	justify-content: space-between;
-	overflow-y: scroll;
 }
 
 #rec-tag {
 	position: absolute;
 	top: 6px;
-	left: 6px;
+	left: -15.5px;
 }
 
 .rec-to-wl {
-	margin: 10px !important;
+	position: absolute;
+	top: 6px;
+	right: 6px;
 }
 
 /* search results for home page */
@@ -166,4 +172,12 @@
 	overflow-y: scroll;
 	width: 90%;
 	height: 90vh;
+}
+
+#modal {
+	text-align: center;
+}
+
+#modal-header {
+	text-transform: uppercase;
 }

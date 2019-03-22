@@ -2,65 +2,45 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { changePage, getSearchedData, getRecData } from '../../actions/allActions'
-import { fetchSearch } from '../../services/backend';
 
-import { Card, Label, Button } from 'semantic-ui-react';
+import { Card, Label, Button, Modal, Embed } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
-let removeAccents = require('../../../node_modules/remove-accents')
 
 class RecCard extends Component {
-
-	handleNameClick = (name) => {
-		// this.props.changePage('explore')
-		const inputString = removeAccents(name.Name)
-		this.seeMoreFetch(inputString)
+	
+	state = {
+		active: null
 	}
-
-	seeMoreFetch = (name) => {
-		fetchSearch(name).then(data => {
-			this.props.getSearchedData(data.Similar.Info[0])
-			this.props.getRecData(data.Similar.Results)
-		})
-	}
+	
+	handleClick = () => this.setState({ active: true })
 
 	render() {	
-		const { Name, Type, wTeaser } = this.props.rec
+
+		const { Name, Type, wTeaser, yID, wUrl } = this.props.rec
 
 		const musicTag =
-		<Label id='rec-tag' as='a' color='red' image>
-				<i className='music icon' />
-				MUSIC
-			</Label>
+		<Label id='rec-tag' as='a' color='red' ribbon>
+				<i className='music icon' />MUSIC</Label>
 		
 		const movieTag =
-			<Label id='rec-tag' as='a' color='orange' image>
-				<i className='film icon' />
-				MOVIE
-			</Label>
+			<Label id='rec-tag' as='a' color='orange' ribbon>
+				<i className='film icon' />MOVIE</Label>
 
 		const showTag =
-			<Label id='rec-tag' as='a' color='yellow' image>
-				<i className='tv icon' />
-				SHOW
-			</Label>
+			<Label id='rec-tag' as='a' color='yellow' ribbon>
+				<i className='tv icon' />SHOW</Label>
 		
 		const podcastTag =
-			<Label id='rec-tag' as='a' color='green' image>
-				<i className='podcast icon' />
-				PODCAST
-			</Label>
+			<Label id='rec-tag' as='a' color='green' ribbon>
+				<i className='podcast icon' />PODCAST</Label>
 			
 		const bookTag =
-			<Label id='rec-tag' as='a' color='blue' image>
-				<i className='book icon' />
-				BOOK
-			</Label>
+			<Label id='rec-tag' as='a' color='blue' ribbon>
+				<i className='book icon' />BOOK</Label>
 		
 		const gameTag =
-			<Label id='rec-tag' as='a' color='blue' image>
-				<i className='game icon' />
-				GAME
-			</Label>
+			<Label id='rec-tag' as='a' color='blue' ribbon>
+				<i className='game icon' />GAME</Label>
 		
 		let tagType
 
@@ -90,46 +70,62 @@ class RecCard extends Component {
 				return null;
 		}	
 
-		// const addBtn = 
-		// 	<Label
-		// 		className='rec-to-wl'
-		// 		as='a' color='black'
-		// 		onClick={null}>
-		// 		<i className='heartbeat icon' />ADD TO WAVELENGTH
-		// 	</Label>
 		
-		// const removeBtn = 
-		// 	<Label
-		// 		className='rec-to-wl'
-		// 		as='a' color='black'
-		// 		onClick={null}>
-		// 		<i className='heartbeat icon' />ADD TO WAVELENGTH
-		// 	</Label>
-	
+		const addBtn = 
+			<Label className='rec-to-wl'
+				as='a' color='olive' onClick={null}>
+				<i className='add icon' />ADD</Label>
+		
+		const removeBtn = 
+			<Label className='rec-to-wl'
+				as='a' color='black' onClick={null}>
+				<i className='remove icon'/>REMOVE</Label>
 
-		// let addOrRemove;
+		let addOrRemove = addBtn;
+
+		if (this.props.wavelength.find(wave => wave.name === this.props.rec.Name)) {
+			addOrRemove = removeBtn
+		} else {
+			addOrRemove = addBtn
+		}
+
 
 		return (
 			<Card id='rec-card'>
 				<Card.Content>
 					{tagType}
+					{addOrRemove}
 					<br/><br/>
 					<Card.Header className='result-name'>{Name}</Card.Header>
 
-					{/* {addOrRemove} */}
-
 					<Card.Description>
-						<p className='card-description'>{wTeaser.slice(0, 500)}</p>
+						<p className='card-description'>{wTeaser.slice(0, 600)}...</p>
 					</Card.Description>
-					<br/>
 
-					<Button
-						inverted
-						className='see-more'
-						color={tagType.props.color}
-						onClick={() => this.handleNameClick({Name})}>
-						See More
-					</Button>
+					<Modal id='modal' trigger=
+						{<Button className='see-more' onClick={this.handleClick}
+							inverted color={tagType.props.color}>SEE MORE</Button>}>
+						
+						<Modal.Header id='modal-header'>						
+							<h3 id='center-name'>{Name}</h3>
+							
+						</Modal.Header>
+
+						<Modal.Content scrolling>
+							
+							<Embed id={yID} source='youtube' active={this.state.active} />
+
+								<br />
+							
+							<Modal.Description>
+								<p>{wTeaser}</p>
+								<a href={wUrl}>Read more about {Name}</a>
+							</Modal.Description>
+
+						</Modal.Content>
+
+					</Modal>
+
 				</Card.Content>
 			</Card>
 		)
@@ -138,7 +134,8 @@ class RecCard extends Component {
 
 const mapStateToProps = state => {
 	return ({
-		wavelength: state.wavelength
+		wavelength: state.wavelength,
+		recData: state.recData
 	})
 }
 
