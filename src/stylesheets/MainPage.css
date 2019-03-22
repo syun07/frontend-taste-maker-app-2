@@ -45,11 +45,15 @@
 
 /* search input container */
 .ui.container .search-input-container {
+	background-image: url(../images/background.png);
+	background-size: cover;
+	border-radius: 45px;
+	padding: 10px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	width: 100vh;
+	width: 88%;
 	letter-spacing: 2px;
 	color: white;
 	height: fit-content;
@@ -151,7 +155,6 @@
 
 /* search results for home page */
 .ui.container #rec-cards-container {
-	margin-top: 1em;
 	display: flex;
 	flex-flow: row wrap;
 	text-align: center;

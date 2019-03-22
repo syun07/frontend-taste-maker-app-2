@@ -53,7 +53,7 @@ class SearchInput extends Component {
 		const show =
 			<Modal id='modal' trigger=
 				{<Button className='more-info-btn' onClick={this.handleModalClick}
-					inverted color='teal'>
+					color='teal'>
 					MORE INFORMATION ON {this.props.searchedData.Name}</Button>}>
 				
 				<Modal.Header id='modal-header'>
@@ -83,7 +83,7 @@ class SearchInput extends Component {
 
 		return (
 			<Container className='search-input-container'>
-				<h5 className='blue-labels'>WHAT IS SOMETHING YOU LOVE?</h5>
+				<h5>WHAT IS SOMETHING YOU LOVE?</h5>
 
 				<Input id='search'
 					placeholder='SEARCH A SONG/ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'
