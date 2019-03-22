@@ -98,9 +98,9 @@
 	border-radius: 10px;
 }
 
-.pink-labels {
+.blue-labels {
 	text-transform: uppercase;
-	background: rosybrown;
+	background: lightsteelblue;
 	width: auto;
 	padding: 10px;
 	letter-spacing: 2px;
@@ -159,6 +159,7 @@
 
 #result-name-desc {
 	background-color: black;
+	font-size: 11px;
 }
 
 .card-description {

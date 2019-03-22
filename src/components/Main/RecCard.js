@@ -112,11 +112,10 @@ class RecCard extends Component {
 							inverted color={tagType.props.color}>SEE MORE</Button>}>
 						
 						<Modal.Header id='modal-header'>						
-							<h3 id='center-name'>{Name}</h3>
+							<h3 className='blue-labels'>{Name}</h3>
 						</Modal.Header>
 
 						<Modal.Content scrolling>
-							
 							<Embed id={yID} source='youtube' active={this.state.active} />
 								<br />
 							

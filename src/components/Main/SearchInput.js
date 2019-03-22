@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Input, Container, Button } from 'semantic-ui-react';
+import { Input, Container, Button, Modal, Embed } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
 import { fetchSearch } from '../../services/backend';
 import { saveSearch, handleTypeChange, getSearchedData, getRecData, handleResult } from '../../actions/allActions'
 
 class SearchInput extends Component {
+
+	state = {
+		active: null
+	}
+	
+	handleModalClick = () => this.setState({ active: true })
 
 	// when user enters something in search
 	// (query, genre) = (event.target.value, this.props.searchType)
@@ -46,9 +52,27 @@ class SearchInput extends Component {
 		const type = this.props.searchType === '' ? 'All Categories' : this.props.searchType
 		
 		const show =
-				<Button className='more-info-btn' inverted color='white'>
-					MORE INFORMATION ON {this.props.searchedData.Name}
-				</Button>
+			<Modal id='modal' trigger=
+				{<Button className='more-info-btn' onClick={this.handleModalClick}
+					inverted color='white'>
+					MORE INFORMATION ON {this.props.searchedData.Name}</Button>}>
+				
+				<Modal.Header id='modal-header'>
+					<h3 className='blue-labels'>{this.props.searchedData.Name}</h3>
+				</Modal.Header>
+
+				<Modal.Content scrolling>
+					<Embed id={this.props.searchedData.yID} source='youtube' active={this.state.active} />
+					<br />
+
+					<Modal.Description>
+						<p>{this.props.searchedData.wTeaser}</p>
+						<a href={this.props.searchedData.wUrl}>Read more about {this.props.searchedData.Name}</a>
+					</Modal.Description>
+
+				</Modal.Content>
+
+				</Modal>
 		
 		let greetOrShow
 
@@ -60,7 +84,7 @@ class SearchInput extends Component {
 
 		return (
 			<Container className='search-input-container'>
-				<h5 className='pink-labels'>WHAT IS SOMETHING YOU LOVE?</h5>
+				<h5 className='blue-labels'>WHAT IS SOMETHING YOU LOVE?</h5>
 
 				<Input id='search'
 					placeholder='SEARCH A SONG/ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'
