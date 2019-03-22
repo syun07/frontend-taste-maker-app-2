@@ -45,16 +45,18 @@ class SearchInput extends Component {
 			})
 		}
 	}
+
+	
 	
 	render() {
-
 		const type = this.props.searchType === '' ? 'All Categories' : this.props.searchType
-		
+
 		const show =
 			<Modal id='modal' trigger=
 				{<Button className='more-info-btn' onClick={this.handleModalClick}
 					color='teal'>
 					MORE INFORMATION ON {this.props.searchedData.Name}</Button>}>
+				
 				
 				<Modal.Header id='modal-header'>
 					<h3 className='blue-labels'>{this.props.searchedData.Name}</h3>
@@ -71,7 +73,7 @@ class SearchInput extends Component {
 
 				</Modal.Content>
 
-				</Modal>
+			</Modal>
 		
 		let showMoreBtn
 
@@ -88,9 +90,6 @@ class SearchInput extends Component {
 				<Input id='search'
 					placeholder='SEARCH A SONG/ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'
 					onChange={(event) => this.handleChange(event)} />
-				<br />
-				
-				{showMoreBtn}
 			
 				<h5>FILTER WAVELENGTH</h5>
 				<div>
@@ -126,9 +125,11 @@ class SearchInput extends Component {
 				</div>
 				<br/>
 
+				{showMoreBtn}
+				<br/>
+
 				{this.props.result === true ?
-					<p className='result-name' id='result-name-desc'>{type} ON THE SAME WAVELENGTH AS {this.props.userSearch}</p> : null
-			 	}
+					<p className='result-name' id='result-name-desc'>{type} ON THE SAME WAVELENGTH AS {this.props.userSearch}</p> : null}
 			</Container>
 		)
 	}
