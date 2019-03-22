@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { changePage, getSearchedData, getRecData } from '../../actions/allActions';
-// import { fetchSearch } from '../../services/backend';
+import { changePage, getSearchedData, getRecData, addToFavorites} from '../../actions/allActions';
+import { deleteFromFavorites, getFavorites } from '../../services/backend';
 
 
 import { Card, Button, Label, Modal, Embed } from 'semantic-ui-react';
@@ -18,16 +18,14 @@ class MyWLCard extends Component {
 	
 	handleClick = () => this.setState({ active: true })
 
-// 	handleClick = () => {
-// 		let favWL
-// 		if (this.props.wavelength !== []) {
-// 			 favWL = this.props.wavelength.find(fav => fav. === this.props.movieInfo.id)
-// 		}
+	handleRemove = () => {
+		let byeWl = this.props.wavelength.find(fav => fav.name === this.props.wave.name)
+		// console.log(byeWl.id)
 
-// 		deleteFavorite(this.props.currentUser, favedMovie.id)
-// 		.then(() => getFavorites(this.props.currentUser))
-// 		.then(data => this.props.setUserFavorites(data.movies))
-//  } 
+		deleteFromFavorites(this.props.userData.id, byeWl.id)
+		.then(() => getFavorites(this.props.userData.id))
+		.then(data => this.props.addToFavorites(data.tastes))
+	} 
 
 
 	render() {
@@ -36,39 +34,27 @@ class MyWLCard extends Component {
 
 		const musicTag =
 		<Label id='rec-tag' as='a' color='red' ribbon>
-				<i className='music icon' />
-				MUSIC
-			</Label>
+				<i className='music icon' />MUSIC</Label>
 		
 		const movieTag =
 			<Label id='rec-tag' as='a' color='orange' ribbon>
-				<i className='film icon' />
-				MOVIE
-			</Label>
+				<i className='film icon' />MOVIE</Label>
 
 		const showTag =
 			<Label id='rec-tag' as='a' color='yellow' ribbon>
-				<i className='tv icon' />
-				SHOW
-			</Label>
+				<i className='tv icon' />SHOW</Label>
 		
 		const podcastTag =
 			<Label id='rec-tag' as='a' color='green' ribbon>
-				<i className='podcast icon' />
-				PODCAST
-			</Label>
+				<i className='podcast icon' />PODCAST</Label>
 			
 		const bookTag =
 			<Label id='rec-tag' as='a' color='blue' ribbon>
-				<i className='book icon' />
-				BOOK
-			</Label>
+				<i className='book icon' />BOOK</Label>
 		
 		const gameTag =
 			<Label id='rec-tag' as='a' color='blue' ribbon>
-				<i className='game icon' />
-				GAME
-			</Label>
+				<i className='game icon' />GAME</Label>
 		
 		let tagType
 
@@ -98,25 +84,15 @@ class MyWLCard extends Component {
 				return null;
 		}	
 
-		const removeBtn = 
-			<Label className='rec-to-wl'
-				as='a' color='black' onClick={() => this.handleRemove}>
-				<i className='remove icon'/>REMOVE</Label>
-
-		let addOrRemove = removeBtn;
-
-		// if (this.props.wavelength.find(wave => wave.name === this.props.wave.name)) {
-		// 	addOrRemove = removeBtn
-		// } else {
-		// 	addOrRemove = addBtn
-		// }
-
 		return ( 
 			// show favorites by type
 			<Card id='rec-card'>
 				<Card.Content>
 					{tagType}
-					{addOrRemove}
+					<Label className='rec-to-wl'
+						as='a' color='black' onClick={() => this.handleRemove(this.props.wave)}>
+						<i className='remove icon' />REMOVE</Label>
+					
 					<br /><br />
 					
 					<Card.Header className='result-name'>{name}</Card.Header>
@@ -155,9 +131,10 @@ class MyWLCard extends Component {
 
 const mapStateToProps = state => {
 	return ({
-		wavelength: state.wavelength
+		wavelength: state.wavelength,
+		userData: state.userData
 	})
 }
 
 
-export default connect(mapStateToProps, { changePage, getSearchedData, getRecData })(MyWLCard);
+export default connect(mapStateToProps, { changePage, getSearchedData, getRecData, addToFavorites })(MyWLCard);

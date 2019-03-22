@@ -77,8 +77,7 @@ export const deleteFromFavorites = (userId, tasteId) => {
 	return fetch(`${LOCALAPI}/remove-wavelength`, {
 		method: 'DELETE',
 		headers: {
-			'Content-Type': 'application/json',
-			'Authorization': localStorage.getItem('token')
+			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
 			user_id: userId,
