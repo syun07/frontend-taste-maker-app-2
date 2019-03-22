@@ -85,7 +85,7 @@ class RecCard extends Component {
 				as='a' color='black' onClick={() => this.handleRemove}>
 				<i className='remove icon'/>REMOVE</Label>
 
-		let addOrRemove = addBtn;
+		let addOrRemove;
 
 		if (this.props.wavelength.find(wave => wave.name === this.props.rec.Name)) {
 			addOrRemove = removeBtn
@@ -99,7 +99,8 @@ class RecCard extends Component {
 				<Card.Content>
 					{tagType}
 					{addOrRemove}
-					<br/><br/>
+					<br /><br />
+					
 					<Card.Header className='result-name'>{Name}</Card.Header>
 
 					<Card.Description>
@@ -117,7 +118,6 @@ class RecCard extends Component {
 						<Modal.Content scrolling>
 							
 							<Embed id={yID} source='youtube' active={this.state.active} />
-
 								<br />
 							
 							<Modal.Description>

@@ -5,12 +5,18 @@ import { changePage, getSearchedData, getRecData } from '../../actions/allAction
 // import { fetchSearch } from '../../services/backend';
 
 
-import { Card, Button, Label } from 'semantic-ui-react';
+import { Card, Button, Label, Modal, Embed } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 // let removeAccents = require('../../../node_modules/remove-accents')
 
 
 class MyWLCard extends Component {
+
+	state = {
+		active: null
+	}
+	
+	handleClick = () => this.setState({ active: true })
 
 // 	handleClick = () => {
 // 		let favWL
@@ -26,40 +32,40 @@ class MyWLCard extends Component {
 
 	render() {
 	
-		const { name, genre, teaser } = this.props.wave
+		const { name, genre, teaser, wUrl, yID } = this.props.wave
 
 		const musicTag =
-		<Label id='rec-tag' as='a' color='red' image>
+		<Label id='rec-tag' as='a' color='red' ribbon>
 				<i className='music icon' />
 				MUSIC
 			</Label>
 		
 		const movieTag =
-			<Label id='rec-tag' as='a' color='orange' image>
+			<Label id='rec-tag' as='a' color='orange' ribbon>
 				<i className='film icon' />
 				MOVIE
 			</Label>
 
 		const showTag =
-			<Label id='rec-tag' as='a' color='yellow' image>
+			<Label id='rec-tag' as='a' color='yellow' ribbon>
 				<i className='tv icon' />
 				SHOW
 			</Label>
 		
 		const podcastTag =
-			<Label id='rec-tag' as='a' color='green' image>
+			<Label id='rec-tag' as='a' color='green' ribbon>
 				<i className='podcast icon' />
 				PODCAST
 			</Label>
 			
 		const bookTag =
-			<Label id='rec-tag' as='a' color='blue' image>
+			<Label id='rec-tag' as='a' color='blue' ribbon>
 				<i className='book icon' />
 				BOOK
 			</Label>
 		
 		const gameTag =
-			<Label id='rec-tag' as='a' color='blue' image>
+			<Label id='rec-tag' as='a' color='blue' ribbon>
 				<i className='game icon' />
 				GAME
 			</Label>
@@ -92,31 +98,55 @@ class MyWLCard extends Component {
 				return null;
 		}	
 
+		const removeBtn = 
+			<Label className='rec-to-wl'
+				as='a' color='black' onClick={() => this.handleRemove}>
+				<i className='remove icon'/>REMOVE</Label>
+
+		let addOrRemove = removeBtn;
+
+		// if (this.props.wavelength.find(wave => wave.name === this.props.wave.name)) {
+		// 	addOrRemove = removeBtn
+		// } else {
+		// 	addOrRemove = addBtn
+		// }
+
 		return ( 
 			// show favorites by type
 			<Card id='rec-card'>
 				<Card.Content>
 					{tagType}
-					<br/><br/>
+					{addOrRemove}
+					<br /><br />
+					
 					<Card.Header className='result-name'>{name}</Card.Header>
 
-					<Label
-						className='rec-to-wl'
-						as='a' color='black'
-						onClick={null}>
-						<i className='heartbeat icon' />REMOVE FROM WAVELENGTH
-					</Label>
 
 					<Card.Description>
-						<p className='card-description'>{teaser.slice(0, 500)}</p>
+						<p className='card-description'>{teaser.slice(0, 600)}...</p>
 					</Card.Description>
 
-					<Button
-						inverted
-						className='see-more'
-						color={tagType.props.color}>
-						See More
-					</Button>
+					<Modal id='modal' trigger=
+						{<Button className='see-more' onClick={this.handleClick}
+							inverted color={tagType.props.color}>SEE MORE</Button>}>
+						
+						<Modal.Header id='modal-header'>						
+							<h3 id='center-name'>{name}</h3>
+						</Modal.Header>
+
+						<Modal.Content scrolling>
+							
+							<Embed id={yID} source='youtube' active={this.state.active} />
+								<br />
+							
+							<Modal.Description>
+								<p>{teaser}</p>
+								<a href={wUrl}>Read more about {name}</a>
+							</Modal.Description>
+
+						</Modal.Content>
+
+					</Modal>
 				</Card.Content>
 			</Card>
 		)
