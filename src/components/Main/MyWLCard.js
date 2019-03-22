@@ -107,7 +107,7 @@ class MyWLCard extends Component {
 							inverted color={tagType.props.color}>SEE MORE</Button>}>
 						
 						<Modal.Header id='modal-header'>						
-							<h3 id='center-name'>{name}</h3>
+							<h3 className='blue-labels'>{name}</h3>
 						</Modal.Header>
 
 						<Modal.Content scrolling>

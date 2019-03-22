@@ -5,15 +5,25 @@ import { changePage, getSearchedData, getRecData, addToFavorites } from '../../a
 
 import { Card, Label, Button, Modal, Embed } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
-import { postFavorite, getFavorites } from '../../services/backend';
+import { postFavorite, getFavorites, deleteFromFavorites } from '../../services/backend';
 
 class RecCard extends Component {
 	
+	// for youtube video
 	state = {
 		active: null
 	}
-	
+
 	handleClick = () => this.setState({ active: true })
+
+	// for removing wavelength
+	handleRemove = () => {
+		let byeWl = this.props.wavelength.find(fav => fav.name === this.props.rec.Name)
+			
+		deleteFromFavorites(this.props.userData.id, byeWl.id)	
+		.then(() => getFavorites(this.props.userData.id))
+		.then(data => this.props.addToFavorites(data.tastes))
+	}
 
 	render() {	
 
@@ -82,7 +92,7 @@ class RecCard extends Component {
 		
 		const removeBtn = 
 			<Label className='rec-to-wl'
-				as='a' color='black' onClick={() => this.handleRemove}>
+				as='a' color='black' onClick={() => this.handleRemove(this.props.rec)}>
 				<i className='remove icon'/>REMOVE</Label>
 
 		let addOrRemove;

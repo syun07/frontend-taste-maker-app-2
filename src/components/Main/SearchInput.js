@@ -45,7 +45,6 @@ class SearchInput extends Component {
 			})
 		}
 	}
-
 	
 	render() {
 
@@ -54,7 +53,7 @@ class SearchInput extends Component {
 		const show =
 			<Modal id='modal' trigger=
 				{<Button className='more-info-btn' onClick={this.handleModalClick}
-					inverted color='white'>
+					inverted color='teal'>
 					MORE INFORMATION ON {this.props.searchedData.Name}</Button>}>
 				
 				<Modal.Header id='modal-header'>
@@ -74,12 +73,12 @@ class SearchInput extends Component {
 
 				</Modal>
 		
-		let greetOrShow
+		let showMoreBtn
 
 		if (this.props.result) {
-			greetOrShow = show
+			showMoreBtn = show
 		} else {
-			greetOrShow = null
+			showMoreBtn = null
 		}
 
 		return (
@@ -91,7 +90,7 @@ class SearchInput extends Component {
 					onChange={(event) => this.handleChange(event)} />
 				<br />
 				
-				{greetOrShow}
+				{showMoreBtn}
 			
 				<h5>FILTER WAVELENGTH</h5>
 				<div>

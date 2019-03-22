@@ -101,7 +101,7 @@
 .blue-labels {
 	text-transform: uppercase;
 	background: lightsteelblue;
-	width: auto;
+	width: fit-content;
 	padding: 10px;
 	letter-spacing: 2px;
 	color: white;
@@ -145,6 +145,8 @@
 
 #modal-header {
 	text-transform: uppercase;
+	display: flex;
+	justify-content: center;
 }
 
 /* search results for home page */
