@@ -87,7 +87,7 @@ class SearchIndResults extends Component {
 				
 			<Container className='searched-result-container'>
 				<br/>
-				<p className='result-messages'>Please enter a song/artist, movie, show, podcast, book/author, or game to find more information!</p>
+				<p className='result-name'>Please enter a song/artist, movie, show, podcast, book/author, or game to find more information!</p>
 			</Container>
 		:
 			<Container className='searched-result-container'>

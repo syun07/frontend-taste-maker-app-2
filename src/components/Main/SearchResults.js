@@ -20,7 +20,7 @@ class SearchResults extends Component {
 		return (
 			this.props.userSearch.length > 1 && this.props.recData.length === 0 ?
 				<Container className='searched-result-container'>
-					<p className='result-messages'>Sorry, there {wasOrWere} no {this.props.searchType} found on the same wavelength as {this.props.userSearch}</p>
+					<p className='result-name'>Sorry, there {wasOrWere} no {this.props.searchType} found on the same wavelength as {this.props.userSearch}</p>
 				</Container>
 				 :
 			<Container id='rec-cards-container'>

@@ -159,7 +159,6 @@ class LoginPage extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log('login', state)
 	return ({
 		form: state.form
 	})

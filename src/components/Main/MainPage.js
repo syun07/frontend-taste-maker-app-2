@@ -108,7 +108,6 @@ class MainPage extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log(state)
 	return ({
 		activeItem: state.activeItem,
 		result: state.result,

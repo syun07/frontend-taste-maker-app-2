@@ -24,7 +24,6 @@ class MyWavelength extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log(state)
 	return ({
 		userData: state.userData,
 		wavelength: state.wavelength

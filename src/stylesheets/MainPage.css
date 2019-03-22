@@ -19,7 +19,6 @@
 
 /* nav bar */
 #navBar {
-	/* background-color: lightsteelblue; */
 	padding: 12px;
 	width: 75%;
 	height: 3em;
@@ -40,8 +39,8 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 90vh;
 	width: 100%;
+	overflow-y: scroll;
 }
 
 /* search input container */
@@ -50,13 +49,15 @@
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
+	width: 100vh;
 	letter-spacing: 2px;
 	color: white;
 	height: fit-content;
 }
 
 .ui.input #search {
-	width: 40em !important;
+	width: 34em !important;
+	height: 2em !important;
 	text-align: center !important;
 }
 
@@ -71,13 +72,16 @@
 	height: 100%;
 	border-radius: 45px;
 	padding: 1em;
-	color: white;
 }
 
 .container::-webkit-scrollbar { 
 	display: none;
 }
 
+.more-info-btn {
+	text-transform: uppercase !important;
+	letter-spacing: 2px;
+}
 .type-tag {
 	position: absolute;
 	left: -23.7em;
@@ -94,11 +98,14 @@
 	border-radius: 10px;
 }
 
-.result-messages {
+.pink-labels {
 	text-transform: uppercase;
+	background: rosybrown;
 	width: auto;
+	padding: 10px;
 	letter-spacing: 2px;
-
+	color: white;
+	border-radius: 10px;
 }
 
 .result-desc {
@@ -132,37 +139,40 @@
 	right: 6px;
 }
 
+#modal {
+	text-align: center;
+}
+
+#modal-header {
+	text-transform: uppercase;
+}
+
 /* search results for home page */
 .ui.container #rec-cards-container {
+	margin-top: 1em;
 	display: flex;
 	flex-flow: row wrap;
 	text-align: center;
 	justify-content: center;
-	align-self: center;
-	overflow-y: scroll;
 	width: 90%;
-	height: 70vh;
-}
-
-#small-desc {
-	font-size: 10px;
-}
-
-.card-description {
-	font-size: 11px;
-}
-
-.see-more {
-	position: absolute;
-	bottom: 15px;
-	left: 95px;
 }
 
 #result-name-desc {
 	background-color: black;
 }
 
-/* search results for home page */
+.card-description {
+	font-size: 11px !important;
+}
+
+.see-more {
+	position: absolute;
+	bottom: 15px;
+	left: 80px;
+	letter-spacing: 2px;
+}
+
+/* my wavelength */
 .ui.container #my-wl-container {
 	display: flex;
 	flex-flow: row wrap;
@@ -172,12 +182,4 @@
 	overflow-y: scroll;
 	width: 90%;
 	height: 90vh;
-}
-
-#modal {
-	text-align: center;
-}
-
-#modal-header {
-	text-transform: uppercase;
 }
