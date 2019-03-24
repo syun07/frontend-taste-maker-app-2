@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { saveSearch, handleTypeChange, getSearchedData, getRecData, handleResult } from '../../actions/allActions'
+import { fetchSearch } from '../../services/backend';
 import { Input, Container, Button, Modal, Embed } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
-import { fetchSearch } from '../../services/backend';
-import { saveSearch, handleTypeChange, getSearchedData, getRecData, handleResult } from '../../actions/allActions'
-
 class SearchInput extends Component {
-
 	state = {
 		active: null
 	}
 	
 	handleModalClick = () => this.setState({ active: true })
 
+	// event listener for typing in input
 	handleChange = event => {
 		this.props.saveSearch(event.target.value)
 		this.handleSearch(event.target.value, this.props.searchType)
 	}
 
+	// event listener for clicking on genre
 	handleClick = genre => {
 		this.props.handleTypeChange(genre)
 		this.handleSearch(this.props.userSearch, genre)
 	}
 
+	// both are sent to this function
 	handleSearch = (query, genre) => {
 		if (query.length < 2) {
 			this.props.handleResult(false)
@@ -41,8 +41,6 @@ class SearchInput extends Component {
 			})
 		}
 	}
-
-	
 	
 	render() {
 		const type = this.props.searchType === '' ? 'All Categories' : this.props.searchType
@@ -50,8 +48,7 @@ class SearchInput extends Component {
 		const show =
 			<Modal id='modal' trigger=
 				{<Button inverted id='web' onClick={this.handleModalClick}>
-					MORE INFORMATION ON {this.props.searchedData.Name}</Button>}>
-				
+					MORE INFORMATION ON {this.props.searchedData.Name}</Button>}>			
 				
 				<Modal.Header id='modal-header'>
 					<h3 className='blue-labels'>{this.props.searchedData.Name}</h3>
@@ -67,16 +64,11 @@ class SearchInput extends Component {
 					</Modal.Description>
 
 				</Modal.Content>
-
 			</Modal>
 		
 		let showMoreBtn
 
-		if (this.props.result) {
-			showMoreBtn = show
-		} else {
-			showMoreBtn = null
-		}
+		this.props.result ? showMoreBtn = show : showMoreBtn = null
 
 		return (
 			<Container className='search-input-container'>
@@ -123,13 +115,13 @@ class SearchInput extends Component {
 						<i className='gamepad icon' /> GAMES
 					</Button>
 				</div>
-				<br/>
 
 				{showMoreBtn}
 				<br/>
 
-				{this.props.result === true ?
-					<p className='result-name' id='result-name-desc'>{type} ON THE SAME WAVELENGTH AS {this.props.userSearch}</p> : null}
+				{this.props.result === false ? null :
+					<p className='result-name' id='result-name-desc'>{type} ON THE SAME WAVELENGTH AS {this.props.userSearch}</p>}
+				
 			</Container>
 		)
 	}
@@ -137,7 +129,6 @@ class SearchInput extends Component {
 
 const mapStateToProps = state => {
 	return ({
-		activeItem: state.activeItem,
 		userSearch: state.userSearch,
 		searchType: state.searchType,
 		searchedData: state.searchedData,

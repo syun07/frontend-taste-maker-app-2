@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import SearchInput from '../Main/SearchInput';
 import SearchResults from '../Main/SearchResults';
-
 import SearchIndividual from '../Main/SearchIndividual';
 import SearchIndResults from '../Main/SearchIndResults';
-
 import MyWLContainer from './MyWLContainer';
-
-import { changePage, clearSearch, getRecData, handleResult, changeLogin, goBack, addToFavorites } from '../../actions/allActions'
+import { changePage, changeLogin, goBack, addToFavorites } from '../../actions/allActions';
 import { getFavorites } from '../../services/backend'
-
 import { Container, Menu } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
 
@@ -19,7 +14,7 @@ class MainPage extends Component {
 	constructor() {
 		super()
 
-		// state for showing which item is currently clicked in navbar
+		// which item is clicked in nav
 		this.state = {
 			activeItem: 'home'
 		}
@@ -40,7 +35,6 @@ class MainPage extends Component {
 	}
 
 	render() {	
-		// define navBar, home, explore, & wavelength pages
 		const navBar = 
 			<Menu secondary id='navBar'>
 				<Menu.Item
@@ -115,4 +109,4 @@ const mapStateToProps = state => {
 	})
 }
 
-export default connect(mapStateToProps, { getRecData, clearSearch, changePage, handleResult, changeLogin, goBack, addToFavorites })(MainPage);
+export default connect(mapStateToProps, { changePage, changeLogin, goBack, addToFavorites })(MainPage);

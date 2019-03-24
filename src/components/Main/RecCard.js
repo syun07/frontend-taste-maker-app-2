@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { changePage, getSearchedData, getRecData, addToFavorites } from '../../actions/allActions'
-
+import { addToFavorites } from '../../actions/allActions'
+import { postFavorite, getFavorites, deleteFromFavorites } from '../../services/backend';
 import { Card, Label, Button, Modal, Embed } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
-import { postFavorite, getFavorites, deleteFromFavorites } from '../../services/backend';
 
 class RecCard extends Component {
 	
@@ -26,34 +24,33 @@ class RecCard extends Component {
 	}
 
 	render() {	
-
 		const { Name, Type, wTeaser, yID, wUrl } = this.props.rec
 
 		const musicTag =
-			<Label id='music' className='rec-tag' as='a' color='red' ribbon>
+			<Label id='music' className='rec-tag' as='a' ribbon>
 				<i className='music icon' />MUSIC</Label>
 		
 		const movieTag =
-			<Label id='movies' className='rec-tag' as='a' color='orange' ribbon>
+			<Label id='movies' className='rec-tag' as='a' ribbon>
 				<i className='film icon' />MOVIE</Label>
 
 		const showTag =
-			<Label id='shows' className='rec-tag' as='a' color='yellow' ribbon>
+			<Label id='shows' className='rec-tag' as='a' ribbon>
 				<i className='tv icon' />SHOW</Label>
 		
 		const podcastTag =
-			<Label id='podcasts' className='rec-tag' as='a' color='green' ribbon>
+			<Label id='podcasts' className='rec-tag' as='a' ribbon>
 				<i className='podcast icon' />PODCAST</Label>
 			
 			const bookTag =
-			<Label id='books' className='rec-tag' as='a' color='blue' ribbon>
+			<Label id='books' className='rec-tag' as='a' ribbon>
 				<i className='book icon' />BOOK</Label>
 		
 		const gameTag =
-			<Label id='games' className='rec-tag' as='a' color='blue' ribbon>
+			<Label id='games' className='rec-tag' as='a' ribbon>
 				<i className='game icon' />GAME</Label>
 		
-		let tagType
+		let tagType;
 
 		switch(Type) {
 			case 'music':
@@ -111,7 +108,7 @@ class RecCard extends Component {
 					{addOrRemove}
 					<br /><br />
 					
-					<Card.Header className='result-name'>{Name}</Card.Header>
+					<Card.Header className='result-name'>{Name.slice(0, 30)}</Card.Header>
 
 					<Card.Description>
 						<p className='card-description'>{wTeaser.slice(0, 600)}...</p>
@@ -119,7 +116,7 @@ class RecCard extends Component {
 
 					<Modal id='modal' trigger=
 						{<Button className='see-more' onClick={this.handleClick}
-							inverted color={tagType.props.color}>SEE MORE</Button>}>
+							basic color='black'>SEE MORE</Button>}>
 						
 						<Modal.Header id='modal-header'>						
 							<h3 className='blue-labels'>{Name}</h3>
@@ -135,9 +132,7 @@ class RecCard extends Component {
 							</Modal.Description>
 
 						</Modal.Content>
-
 					</Modal>
-
 				</Card.Content>
 			</Card>
 		)
@@ -147,9 +142,8 @@ class RecCard extends Component {
 const mapStateToProps = state => {
 	return ({
 		wavelength: state.wavelength,
-		recData: state.recData,
 		userData: state.userData
 	})
 }
 
-export default connect(mapStateToProps, { changePage, getSearchedData, getRecData, addToFavorites })(RecCard);
+export default connect(mapStateToProps, { addToFavorites })(RecCard);

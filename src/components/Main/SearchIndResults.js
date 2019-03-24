@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import YouTube from 'react-youtube';
-
+import { addToFavorites } from '../../actions/allActions'
+import { postFavorite, getFavorites, deleteFromFavorites } from '../../services/backend';
 import { Container, Label } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
-import { postFavorite, getFavorites, deleteFromFavorites } from '../../services/backend';
-import { addToFavorites } from '../../actions/allActions'
-
 
 class SearchIndResults extends Component {
 
-	// handleRemove = () => {
-	// 	let byeWl = this.props.wavelength.find(fav => fav.name === this.props.searchedData.Name)
+	handleRemove = () => {
+		let byeWl = this.props.wavelength.find(fav => fav.name === this.props.searchedData.Name)
 			
-	// 	deleteFromFavorites(this.props.userData.id, byeWl.id)	
-	// 	.then(() => getFavorites(this.props.userData.id))
-	// 	.then(data => this.props.addToFavorites(data.tastes))
-	// }
+		deleteFromFavorites(this.props.userData.id, byeWl.id)	
+		.then(() => getFavorites(this.props.userData.id))
+		.then(data => this.props.addToFavorites(data.tastes))
+	}
 
 	render() {
 		const opts = {
@@ -28,39 +26,27 @@ class SearchIndResults extends Component {
 
 		const musicTag =
 			<Label id='music' className='ind-type-tag' as='a' ribbon>
-				<i className='music icon' />
-				MUSIC
-			</Label>
+				<i className='music icon' />MUSIC</Label>
 		
 		const movieTag =
 			<Label id='movies' className='ind-type-tag' as='a' ribbon>
-				<i className='film icon' />
-				MOVIE
-			</Label>
+				<i className='film icon' />MOVIE</Label>
 
 		const showTag =
 			<Label id='shows' className='ind-type-tag' as='a' ribbon>
-				<i className='tv icon' />
-				SHOW
-			</Label>
+				<i className='tv icon' />SHOW</Label>
 		
 		const podcastTag =
 			<Label id='podcasts' className='ind-type-tag' as='a' ribbon>
-				<i className='podcast icon' />
-				PODCAST
-			</Label>
+				<i className='podcast icon' />PODCAST</Label>
 			
 		const bookTag =
 			<Label id='books' className='ind-type-tag' as='a' ribbon>
-				<i className='book icon' />
-				BOOK
-			</Label>
+				<i className='book icon' />BOOK</Label>
 		
 		const gameTag =
 			<Label id='games' className='ind-type-tag' as='a' ribbon>
-				<i className='game icon' />
-				GAME
-			</Label>
+				<i className='game icon' />GAME</Label>
 		
 		let tagType
 
@@ -112,24 +98,19 @@ class SearchIndResults extends Component {
 		}
 
 		return (
-			this.props.result === false || this.props.userSearch === '' ? 
+			this.props.result === false ? 
 				
 			<Container className='searched-result-container'>
 				<br/>
 				<p className='result-name'>Please enter a valid search</p>
 			</Container>
 		:
-		
 			<Container id='search-card-result'>
 				{tagType}
 				<h3 className='blue-labels'>{Name}</h3>
 				{addOrRemove}
 
-				{yUrl === undefined || null ? null :
-				<YouTube
-					videoId={yID}
-					opts={opts} />
-				}
+				{yUrl === undefined || null ? null : <YouTube videoId={yID} opts={opts} />}
 				<br/>
 				<p>{wTeaser}</p>
 				<a href={wUrl}>Read More About {Name}</a>
@@ -142,12 +123,10 @@ const mapStateToProps = state => {
 	console.log(state)
 	return ({
 		result: state.result,
-		userSearch: state.userSearch,
 		searchedData: state.searchedData,
-		recData: state.recData,
 		userData: state.userData,
 		wavelength: state.wavelength
 	})
 }
 
-export default connect(mapStateToProps, {addToFavorites})(SearchIndResults)
+export default connect(mapStateToProps, { addToFavorites })(SearchIndResults)

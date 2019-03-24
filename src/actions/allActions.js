@@ -53,12 +53,6 @@ export const saveSearch = query => {
 	}
 }
 
-export const clearSearch = () => {
-	return {
-		type: 'CLEAR_SEARCH'
-	}
-}
-
 // change searchType depending on which btn is clicked
 export const handleTypeChange = genre => {
 	return {

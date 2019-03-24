@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { changePage, getSearchedData, getRecData, addToFavorites} from '../../actions/allActions';
 import { deleteFromFavorites, getFavorites } from '../../services/backend';
-
-
 import { Card, Button, Label, Modal, Embed } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
-// let removeAccents = require('../../../node_modules/remove-accents')
 
 
 class MyWLCard extends Component {
-
 	state = {
 		active: null
 	}
@@ -27,7 +21,6 @@ class MyWLCard extends Component {
 	} 
 
 	render() {
-	
 		const { name, genre, teaser, wUrl, yID } = this.props.wave
 
 		const musicTag =
@@ -83,7 +76,6 @@ class MyWLCard extends Component {
 		}	
 
 		return ( 
-			// show favorites by type
 			<Card id='rec-card'>
 				<Card.Content>
 					{tagType}
@@ -93,7 +85,7 @@ class MyWLCard extends Component {
 					
 					<br /><br />
 					
-					<Card.Header className='result-name'>{name}</Card.Header>
+					<Card.Header className='result-name'>{name.slice(0, 30)}</Card.Header>
 
 
 					<Card.Description>
@@ -102,7 +94,7 @@ class MyWLCard extends Component {
 
 					<Modal id='modal' trigger=
 						{<Button className='see-more' onClick={this.handleClick}
-							inverted color={tagType.props.color}>SEE MORE</Button>}>
+							basic color='black'>SEE MORE</Button>}>
 						
 						<Modal.Header id='modal-header'>						
 							<h3 className='blue-labels'>{name}</h3>
@@ -119,7 +111,6 @@ class MyWLCard extends Component {
 							</Modal.Description>
 
 						</Modal.Content>
-
 					</Modal>
 				</Card.Content>
 			</Card>
@@ -134,5 +125,4 @@ const mapStateToProps = state => {
 	})
 }
 
-
-export default connect(mapStateToProps, { changePage, getSearchedData, getRecData, addToFavorites })(MyWLCard);
+export default connect(mapStateToProps)(MyWLCard);

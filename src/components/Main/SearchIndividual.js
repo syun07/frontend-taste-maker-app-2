@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSearch } from '../../services/backend'
 import { saveSearch, getSearchedData, getRecData, handleResult } from '../../actions/allActions'
-
-
+import { fetchSearch } from '../../services/backend'
 import { Container, Input } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
@@ -15,7 +13,7 @@ class SearchIndividual extends Component {
 	}
 
 	handleSearch = (query, genre) => {
-		if (query === '' || query.length < 2) {
+		if (query.length < 2) {
 			this.props.handleResult(false)
 		} else {
 			fetchSearch(query, genre)
@@ -31,25 +29,25 @@ class SearchIndividual extends Component {
 		}
 	}
 
-
 	render() {
 		return (
 			<Container className='search-input-container'>
-				<h4>SEARCH ANYTHING</h4>
+				<h4>EXPLORE MORE INFORMATION ON ANYTHING</h4>
 				<Input id='search'
 					placeholder='SEARCH ANY SONG/ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'
 					onChange={(event) => this.handleChange(event)} />
+				<br/>
+				<div className='icon-cont'>
+					<i className='music icon'/>
+					<i className='film icon'/>
+					<i className='tv icon'/>
+					<i className='podcast icon'/>
+					<i className='book icon'/>
+					<i className='gamepad icon'/>
+				</div>
 			</Container>
 		)
 	}
 }
 
-const mapStateToProps = state => {
-	return ({
-		activeItem: state.activeItem,
-		userSearch: state.userSearch,
-		searchedData: state.searchedData
-	})
-}
-
-export default connect(mapStateToProps, { saveSearch, getSearchedData, getRecData, handleResult })(SearchIndividual)
+export default connect(null, { saveSearch, getSearchedData, getRecData, handleResult })(SearchIndividual)

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { clickLogin, clickSignUp, changeLogin, goBack, setUserInfo } from '../../actions/allActions';
 import { addNewUser, getAuthToken, getUserInfo } from '../../services/backend';
-
 import { Form, Button } from 'semantic-ui-react';
 import '../../stylesheets/LoginPage.css';
 
@@ -60,10 +59,10 @@ class LoginPage extends Component {
 			
 				<div className='open-page-btns'>
 					<Button.Group>
-						<Button inverted color='teal'
+						<Button inverted id='login-btn'
 							onClick={this.props.clickLogin}>LOGIN</Button>
 						<Button.Or />
-						<Button color='teal'
+						<Button id='signup-btn'
 							onClick={this.props.clickSignUp}>SIGNUP</Button>
 					</Button.Group>
 				</div>
@@ -71,68 +70,46 @@ class LoginPage extends Component {
 
 		const loginForm =
 			<div className='login-form-container'>
-				<Form
-					onSubmit={this.handleLogin}>
-					<h1 className='labels'>LOGIN</h1>
+				<Form onSubmit={this.handleLogin}>					
+					<h1 className='labels'>WELCOME BACK</h1>
+
 					<Form.Field>
-						<input
-							placeholder='NAME'
-							name='name'
+						<input placeholder='NAME' name='name'
 							onChange={this.handleChange} />
 					</Form.Field>
 				
 					<Form.Field>
-						<input
-							placeholder='PASSWORD'
-							name='password'
-							type='password'
+						<input placeholder='PASSWORD' name='password' type='password'
 							onChange={this.handleChange} />
 					</Form.Field>
 
-					<Button
-						color='teal'
-						type='submit'>
-						LOGIN
-					</Button>
+					<Button id='signup-btn' type='submit'>LOGIN</Button>
 				</Form>
 			</div>
 		
 		const signupForm =
 			<div className='signup-form-container'>
-				<Form
-					onSubmit={this.handleSubmit}>
-					<h1 className='labels'>SIGN UP</h1>
+				<Form onSubmit={this.handleSubmit}>
+					<h1 className='labels'>WELCOME</h1>
+
 					<Form.Field>
-						<input
-							placeholder='NAME'
-							name='newName'
+						<input placeholder='NAME' name='newName'
 							onChange={this.handleChange} />
 					</Form.Field>
 				
 					<Form.Field>
-						<input
-							placeholder='PASSWORD'
-							name='newPassword'
-							type='password'
+						<input placeholder='PASSWORD' name='newPassword' type='password'
 							onChange={this.handleChange} />
 					</Form.Field>
 
-					<Button
-						color='teal'
-						type='submit'>
-						SIGN UP
-					</Button>
+					<Button id='signup-btn' type='submit'>SIGN UP</Button>
 				</Form>
 			</div>		
 		
 		const goBackBtn =
 			<div className='back-btn-container'> 
-				<Button inverted
-					color='teal'
-					id='back-btn'
-					onClick={this.props.goBack}>
-					BACK
-				</Button>
+				<Button inverted id='login-btn' className='back-btn'
+					onClick={this.props.goBack}>BACK</Button>
 			</div>
 		
 		let whichForm;

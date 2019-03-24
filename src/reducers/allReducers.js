@@ -18,6 +18,7 @@ let initialState = {
 	// don't show info for invalid fetches
 	result: false,
 
+	// wavelength, fetch all associated with user upon login
 	wavelength: []
 }
 
@@ -43,9 +44,6 @@ export default (state = initialState, action) => {
 		// SAVE SEARCH & TYPE
 		case 'SAVE_SEARCH':
 			return { ...state, userSearch: action.query }
-
-		case 'CLEAR_SEARCH':
-			return {...state, userSearch: ''}
 		
 		case 'HANDLE_TYPE_CHANGE':
 			return { ...state, searchType: action.genre }

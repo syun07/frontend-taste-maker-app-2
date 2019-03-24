@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import MyWLCard from '../Main/MyWLCard';
-
 import { Container, Dropdown } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
@@ -23,81 +21,62 @@ class MyWavelength extends Component {
 
 	render() {
 
+		// filter wavelength by genre
 		const filterWl = this.props.wavelength.filter(wave => 
 			wave.genre === this.state.filterBy
 		)
-
+		
 		const mapFavs = filterWl.map(w =>
-			<MyWLCard
-				key={w.id}
-				wave={w} />	
+			<MyWLCard key={w.id} wave={w} />	
 		)
-		console.log(filterWl)
 
+		// all wavelength
 		const allWl = this.props.wavelength.map(w =>
-			<MyWLCard
-				key={w.id}
-				wave={w} />
+			<MyWLCard key={w.id} wave={w} />
 		)
 		
+		// filter by all vs filter by genre
 		let wavelength;
 
 		this.state.filterBy === 'all' ? wavelength = allWl : wavelength = mapFavs
-		
 
 		const options = [
 			{
-				key: 'all',
-				text: 'ALL',
-				value: 'all',
+				text: 'ALL', value: 'all',
 				image: <i className='filter icon'/>,
 			},
 			{
-				key: 'music',
-				text: 'MUSIC',
-				value: 'music',
+				text: 'MUSIC', value: 'music',
 				image: <i className='music icon'/>,
 			},
 			{
-				key: 'movies',
-				text: 'MOVIES',
-				value: 'movie',
+				text: 'MOVIES', value: 'movie',
 				image: <i className='film icon' />,
 			},
 			{
-				key: 'shows',
-				text: 'SHOWS',
-				value: 'show',
+				text: 'SHOWS', value: 'show',
 				image: <i className='tv icon'/>,
 			},
 			{
-				key: 'podcasts',
-				text: 'PODCASTS',
-				value: 'podcast',
+				text: 'PODCASTS', value: 'podcast',
 				image: <i className='podcast icon' />,
 			},
 			{
-				key: 'books',
-				text: 'BOOKS',
-				value: 'book',
+				text: 'BOOKS', value: 'book',
 				image: <i className='book icon' />
 	
 			},
 			{
-				key: 'games',
-				text: 'GAMES',
-				value: 'game',
+				text: 'GAMES', value: 'game',
 				image: <i className='gamepad icon'/>,
 			},
 		]
 		
-
 		return ( 
 			<div className='my-wavelength-page'>
 				<span className='search-input-container'>
 					FILTER MY WAVELENGTH BY
-					<Dropdown
-						inline
+					<Dropdown inline
 						options={options}
 						defaultValue={options[0].value}
 						onChange={this.handleChange}
@@ -113,7 +92,6 @@ class MyWavelength extends Component {
 
 const mapStateToProps = state => {
 	return ({
-		userData: state.userData,
 		wavelength: state.wavelength
 	})
 }

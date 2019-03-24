@@ -50,8 +50,13 @@
 	color: rosybrown;
 }
 
-.ui.inverted.teal.button, .ui.teal.button {
-	letter-spacing: 4px;
+#login-btn, #signup-btn{
+	letter-spacing: 5px;
+}
+
+#signup-btn {
+	background-color: lightsteelblue;
+	color: white;
 }
 
 .ui.form {
@@ -67,9 +72,8 @@ input {
 	height: 2.8em !important;
 }
 
-#back-btn {
-	letter-spacing: 2px;
-	position: absolute;
-	left: 6%;
-	top: 8%;
+.back-btn {
+	position: absolute !important;
+	left: 6% !important;
+	top: 8% !important;
 }
