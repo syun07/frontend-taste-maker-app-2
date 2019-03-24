@@ -15,22 +15,18 @@ class SearchInput extends Component {
 	
 	handleModalClick = () => this.setState({ active: true })
 
-	// when user enters something in search
-	// (query, genre) = (event.target.value, this.props.searchType)
 	handleChange = event => {
 		this.props.saveSearch(event.target.value)
 		this.handleSearch(event.target.value, this.props.searchType)
 	}
 
-	// when user clicks a genre (before or after search)
-	// (query, genre) = (this.props.userSearch, genre that's passed in as a string)
 	handleClick = genre => {
 		this.props.handleTypeChange(genre)
 		this.handleSearch(this.props.userSearch, genre)
 	}
 
 	handleSearch = (query, genre) => {
-		if (query === '' || this.props.userSearch.length < 2) {
+		if (query.length < 1 || this.props.userSearch.length < 2) {
 			this.props.handleResult(false)
 		} else {
 			fetchSearch(query, genre)
@@ -53,8 +49,7 @@ class SearchInput extends Component {
 
 		const show =
 			<Modal id='modal' trigger=
-				{<Button className='more-info-btn' onClick={this.handleModalClick}
-					color='teal'>
+				{<Button inverted id='web' onClick={this.handleModalClick}>
 					MORE INFORMATION ON {this.props.searchedData.Name}</Button>}>
 				
 				
@@ -92,35 +87,40 @@ class SearchInput extends Component {
 					onChange={(event) => this.handleChange(event)} />
 			
 				<h5>FILTER WAVELENGTH</h5>
-				<div>
-					<Button color='red'
+				<div> 
+					<Button id='all'
+						onClick={() => this.handleClick('')}>
+						<i className='chess queen icon' />ALL
+					</Button>
+
+					<Button id='music'
 						onClick={() => this.handleClick('music')}>
-						<i className='music icon' /> Music
+						<i className='music icon' /> MUSIC
 					</Button>
 
-					<Button color='orange'
+					<Button id='movies'
 						onClick={() => this.handleClick('movies')}>
-						<i className='film icon' /> Movies
+						<i className='film icon' /> MOVIES
 					</Button>
 
-					<Button color='yellow'
+					<Button id='shows'
 						onClick={() => this.handleClick('shows')}>
-						<i className='tv icon' /> Shows
+						<i className='tv icon' /> SHOWS
 					</Button>
 
-					<Button color='green'
+					<Button id='podcasts'
 						onClick={() => this.handleClick('podcasts')}>
-						<i className='podcast icon' /> Podcasts
+						<i className='podcast icon' /> PODCASTS
 					</Button>
 
-					<Button color='blue'
+					<Button id='books'
 						onClick={() => this.handleClick('books')}>
-						<i className='book icon' /> Books
+						<i className='book icon' /> BOOKS
 					</Button>
 
-					<Button color='purple'
+					<Button id='games'
 						onClick={() => this.handleClick('games')}>
-						<i className='gamepad icon' /> Games
+						<i className='gamepad icon' /> GAMES
 					</Button>
 				</div>
 				<br/>

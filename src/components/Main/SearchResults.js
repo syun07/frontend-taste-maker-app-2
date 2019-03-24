@@ -18,7 +18,8 @@ class SearchResults extends Component {
 		const wasOrWere = this.props.searchType === 'music' ? 'was' : 'were'
 
 		return (
-			this.props.userSearch.length > 1 && this.props.recData.length === 0 ?
+			// this.props.userSearch.length > 0 && this.props.recData.length === 0 ?
+			this.props.result === false || this.props.recData.length === 0 ?
 				<Container className='searched-result-container'>
 					<p className='result-name'>Sorry, there {wasOrWere} no {this.props.searchType} found on the same wavelength as {this.props.userSearch}</p>
 				</Container>
@@ -31,6 +32,7 @@ class SearchResults extends Component {
 }
 
 const mapStateToProps = state => {
+	console.log(state)
 	return ({
 		result: state.result,
 		userSearch: state.userSearch,

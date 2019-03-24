@@ -95,7 +95,7 @@ class MyWavelength extends Component {
 		return ( 
 			<div className='my-wavelength-page'>
 				<span className='search-input-container'>
-					Filter My Wavelength by
+					FILTER MY WAVELENGTH BY
 					<Dropdown
 						inline
 						options={options}
@@ -104,7 +104,6 @@ class MyWavelength extends Component {
 					/>
 				</span>
 				<Container id='my-wl-container'>			
-					{console.log(this.state)}
 					{wavelength}
 				</Container>
 			</div>
