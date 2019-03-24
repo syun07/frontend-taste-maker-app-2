@@ -26,7 +26,7 @@ class SearchInput extends Component {
 	}
 
 	handleSearch = (query, genre) => {
-		if (query.length < 1 || this.props.userSearch.length < 2) {
+		if (query.length < 2) {
 			this.props.handleResult(false)
 		} else {
 			fetchSearch(query, genre)
@@ -89,7 +89,7 @@ class SearchInput extends Component {
 				<h5>FILTER WAVELENGTH</h5>
 				<div> 
 					<Button id='all'
-						onClick={() => this.handleClick('')}>
+						onClick={() => this.handleClick('results')}>
 						<i className='chess queen icon' />ALL
 					</Button>
 

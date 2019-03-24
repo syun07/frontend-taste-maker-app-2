@@ -16,12 +16,21 @@ class SearchResults extends Component {
 		)
 		
 		const wasOrWere = this.props.searchType === 'music' ? 'was' : 'were'
+	
+		const noWavelength =
+			<p className='result-name'>Sorry, there {wasOrWere} no {this.props.searchType} found on the same wavelength as {this.props.userSearch}</p>
+			
+		const noResults =
+			<p className='result-name'>Please enter a valid search</p>
+		
+		let message;
+
+		this.props.searchType === 'results' ? message = noResults : message = noWavelength
 
 		return (
-			// this.props.userSearch.length > 0 && this.props.recData.length === 0 ?
-			this.props.result === false || this.props.recData.length === 0 ?
+			this.props.result === false ?
 				<Container className='searched-result-container'>
-					<p className='result-name'>Sorry, there {wasOrWere} no {this.props.searchType} found on the same wavelength as {this.props.userSearch}</p>
+					{message}
 				</Container>
 				 :
 			<Container id='rec-cards-container'>

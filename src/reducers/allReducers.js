@@ -9,7 +9,7 @@ let initialState = {
 	
 	// save search & type
 	userSearch: '',
-	searchType: '',
+	searchType: 'results',
 	
 	// data that returns from fetch if valid
 	searchedData: {},
