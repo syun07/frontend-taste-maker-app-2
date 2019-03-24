@@ -30,27 +30,27 @@ class RecCard extends Component {
 		const { Name, Type, wTeaser, yID, wUrl } = this.props.rec
 
 		const musicTag =
-			<Label id='rec-tag' as='a' color='red' ribbon>
+			<Label id='music' className='rec-tag' as='a' color='red' ribbon>
 				<i className='music icon' />MUSIC</Label>
 		
 		const movieTag =
-			<Label id='rec-tag' as='a' color='orange' ribbon>
+			<Label id='movies' className='rec-tag' as='a' color='orange' ribbon>
 				<i className='film icon' />MOVIE</Label>
 
 		const showTag =
-			<Label id='rec-tag' as='a' color='yellow' ribbon>
+			<Label id='shows' className='rec-tag' as='a' color='yellow' ribbon>
 				<i className='tv icon' />SHOW</Label>
 		
 		const podcastTag =
-			<Label id='rec-tag' as='a' color='green' ribbon>
+			<Label id='podcasts' className='rec-tag' as='a' color='green' ribbon>
 				<i className='podcast icon' />PODCAST</Label>
 			
-		const bookTag =
-			<Label id='rec-tag' as='a' color='blue' ribbon>
+			const bookTag =
+			<Label id='books' className='rec-tag' as='a' color='blue' ribbon>
 				<i className='book icon' />BOOK</Label>
 		
 		const gameTag =
-			<Label id='rec-tag' as='a' color='blue' ribbon>
+			<Label id='games' className='rec-tag' as='a' color='blue' ribbon>
 				<i className='game icon' />GAME</Label>
 		
 		let tagType

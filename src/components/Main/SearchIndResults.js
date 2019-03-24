@@ -4,8 +4,8 @@ import YouTube from 'react-youtube';
 
 import { Container, Label } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
-// import { postFavorite, getFavorites, deleteFromFavorites } from '../../services/backend';
-// import { addToFavorites } from '../../actions/allActions'
+import { postFavorite, getFavorites, deleteFromFavorites } from '../../services/backend';
+import { addToFavorites } from '../../actions/allActions'
 
 
 class SearchIndResults extends Component {
@@ -27,37 +27,37 @@ class SearchIndResults extends Component {
 		const { Name, Type, wTeaser, wUrl, yUrl, yID } = this.props.searchedData
 
 		const musicTag =
-			<Label className='ind-type-tag' as='a' color='red' ribbon>
+			<Label id='music' className='ind-type-tag' as='a' ribbon>
 				<i className='music icon' />
 				MUSIC
 			</Label>
 		
 		const movieTag =
-			<Label className='ind-type-tag' as='a' color='orange' ribbon>
+			<Label id='movies' className='ind-type-tag' as='a' ribbon>
 				<i className='film icon' />
 				MOVIE
 			</Label>
 
 		const showTag =
-			<Label className='ind-type-tag' as='a' color='yellow' ribbon>
+			<Label id='shows' className='ind-type-tag' as='a' ribbon>
 				<i className='tv icon' />
 				SHOW
 			</Label>
 		
 		const podcastTag =
-			<Label className='ind-type-tag' as='a' color='green' ribbon>
+			<Label id='podcasts' className='ind-type-tag' as='a' ribbon>
 				<i className='podcast icon' />
 				PODCAST
 			</Label>
 			
 		const bookTag =
-			<Label className='ind-type-tag' as='a' color='blue' ribbon>
+			<Label id='books' className='ind-type-tag' as='a' ribbon>
 				<i className='book icon' />
 				BOOK
 			</Label>
 		
 		const gameTag =
-			<Label className='ind-type-tag' as='a' color='blue' ribbon>
+			<Label id='games' className='ind-type-tag' as='a' ribbon>
 				<i className='game icon' />
 				GAME
 			</Label>
@@ -90,51 +90,49 @@ class SearchIndResults extends Component {
 				return null;
 		}	
 
-		// const addBtn = 
-		// 	<Label className='search-to-wl'
-		// 		as='a' color='olive'
-		// 		onClick={() => postFavorite(this.props.searchedData, this.props.userData.id)
-		// 			.then(() => getFavorites(this.props.userData.id))
-		// 			.then(data => this.props.addToFavorites(data.tastes))}>
-		// 		<i className='add icon' />ADD</Label>
+		const addBtn = 
+			<Label id='search-to-wl'
+				as='a' color='olive'
+				onClick={() => postFavorite(this.props.searchedData, this.props.userData.id)
+					.then(() => getFavorites(this.props.userData.id))
+					.then(data => this.props.addToFavorites(data.tastes))}>
+				<i className='add icon' />ADD</Label>
 		
-		// const removeBtn = 
-		// 	<Label className='search-to-wl'
-		// 		as='a' color='black' onClick={() => this.handleRemove(this.props.searchedData)}>
-		// 		<i className='remove icon'/>REMOVE</Label>
+		const removeBtn = 
+			<Label id='search-to-wl'
+				as='a' color='black' onClick={() => this.handleRemove(this.props.searchedData)}>
+				<i className='remove icon'/>REMOVE</Label>
 
-		// let addOrRemove;
+		let addOrRemove;
 
-		// if (this.props.wavelength.find(wave => wave.name === this.props.searchedData.Name)) {
-		// 	addOrRemove = removeBtn
-		// } else {
-		// 	addOrRemove = addBtn
-		// }
+		if (this.props.wavelength.find(wave => wave.name === this.props.searchedData.Name)) {
+			addOrRemove = removeBtn
+		} else {
+			addOrRemove = addBtn
+		}
 
 		return (
 			this.props.result === false || this.props.userSearch === '' ? 
 				
 			<Container className='searched-result-container'>
 				<br/>
-				<p className='result-name'>Please enter a song/artist, movie, show, podcast, book/author, or game to find more information!</p>
+				<p className='result-name'>Please enter a valid search</p>
 			</Container>
 		:
 		
 			<Container id='search-card-result'>
-				<br/>
-				<h4 className='blue-labels'>{Name}</h4>
 				{tagType}
-				{/* {addOrRemove} */}
+				<h3 className='blue-labels'>{Name}</h3>
+				{addOrRemove}
 
 				{yUrl === undefined || null ? null :
 				<YouTube
 					videoId={yID}
 					opts={opts} />
 				}
-				
-					<p>{wTeaser}</p>
-					<a href={wUrl}>Read More About {Name}</a>
-					
+				<br/>
+				<p>{wTeaser}</p>
+				<a href={wUrl}>Read More About {Name}</a>
 			</Container>
 		)
 	}
@@ -152,4 +150,4 @@ const mapStateToProps = state => {
 	})
 }
 
-export default connect(mapStateToProps)(SearchIndResults)
+export default connect(mapStateToProps, {addToFavorites})(SearchIndResults)

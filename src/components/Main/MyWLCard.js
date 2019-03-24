@@ -20,40 +20,38 @@ class MyWLCard extends Component {
 
 	handleRemove = () => {
 		let byeWl = this.props.wavelength.find(fav => fav.name === this.props.wave.name)
-		// console.log(byeWl.id)
 
 		deleteFromFavorites(this.props.userData.id, byeWl.id)
 		.then(() => getFavorites(this.props.userData.id))
 		.then(data => this.props.addToFavorites(data.tastes))
 	} 
 
-
 	render() {
 	
 		const { name, genre, teaser, wUrl, yID } = this.props.wave
 
 		const musicTag =
-		<Label id='rec-tag' as='a' color='red' ribbon>
+		<Label id='music' className='rec-tag' as='a' ribbon>
 				<i className='music icon' />MUSIC</Label>
 		
 		const movieTag =
-			<Label id='rec-tag' as='a' color='orange' ribbon>
+			<Label id='movies' className='rec-tag' as='a' ribbon>
 				<i className='film icon' />MOVIE</Label>
 
 		const showTag =
-			<Label id='rec-tag' as='a' color='yellow' ribbon>
+			<Label id='shows' className='rec-tag' as='a' ribbon>
 				<i className='tv icon' />SHOW</Label>
 		
 		const podcastTag =
-			<Label id='rec-tag' as='a' color='green' ribbon>
+			<Label id='podcasts' className='rec-tag' as='a' ribbon>
 				<i className='podcast icon' />PODCAST</Label>
 			
 		const bookTag =
-			<Label id='rec-tag' as='a' color='blue' ribbon>
+			<Label id='books' className='rec-tag' as='a' ribbon>
 				<i className='book icon' />BOOK</Label>
 		
 		const gameTag =
-			<Label id='rec-tag' as='a' color='blue' ribbon>
+			<Label id='games' className='rec-tag' as='a' ribbon>
 				<i className='game icon' />GAME</Label>
 		
 		let tagType

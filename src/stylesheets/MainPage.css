@@ -68,11 +68,9 @@
 /* search results for explore page */
 .ui.container .searched-result-container {
 	margin-top: 2em;
-	display: flex;
-	flex-direction: column;
 	text-align: center;
 	align-items: center;
-	width: 100%;
+	width: 60%;
 	height: 100%;
 	border-radius: 45px;
 	padding: 1em;
@@ -127,10 +125,10 @@
 	justify-content: space-between;
 }
 
-#rec-tag {
-	position: absolute;
-	top: 6px;
-	left: -15.5px;
+.rec-tag {
+	position: absolute !important;
+	top: 6px !important;
+	left: -15.5px !important;
 }
 
 .rec-to-wl {
@@ -185,25 +183,27 @@
 }
 
 .ind-type-tag {
-	position: absolute !important;
-	left: 376px !important;
-	top: 18em;
+	left: -32.5em !important;
+	top: 2em !important;
+}
+
+#search-to-wl {
+	position: relative;
+	left: 30em;
+	top: -7em;
 }
 
 #search-card-result {
-	margin-top: 3em;
+	margin-top: 2em;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
 	background: white;
-	width: 50%;
-}
-
-.search-to-wl {
-	position: absolute;
-	right: 34em;
-	top: 18em;
+	width: 60em;
+	height: fit-content;
+	padding-bottom: 2em;
+	margin-bottom: 2em;
 }
 
 .my-wavelength-page {
@@ -223,7 +223,7 @@
 }
 
 #music {
-	background-color: #e17055;
+	background-color: #e17055 !important;
 	color: white;
 }
 
@@ -250,4 +250,8 @@
 #games {
 	background-color: #6c5ce7;
 	color: white;
+}
+
+.ui.ribbon.label:after {
+	border-right-color: black !important;
 }
