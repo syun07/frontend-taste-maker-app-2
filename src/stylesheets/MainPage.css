@@ -209,3 +209,9 @@
 	right: 34em;
 	top: 18em;
 }
+
+.my-wavelength-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

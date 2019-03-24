@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import YouTube from 'react-youtube';
 
-import { Container, Label, Card } from 'semantic-ui-react';
+import { Container, Label } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
-import { postFavorite, getFavorites, deleteFromFavorites } from '../../services/backend';
-import { addToFavorites } from '../../actions/allActions'
+// import { postFavorite, getFavorites, deleteFromFavorites } from '../../services/backend';
+// import { addToFavorites } from '../../actions/allActions'
 
 
 class SearchIndResults extends Component {
 
-	handleRemove = () => {
-		let byeWl = this.props.wavelength.find(fav => fav.name === this.props.searchedData.Name)
+	// handleRemove = () => {
+	// 	let byeWl = this.props.wavelength.find(fav => fav.name === this.props.searchedData.Name)
 			
-		deleteFromFavorites(this.props.userData.id, byeWl.id)	
-		.then(() => getFavorites(this.props.userData.id))
-		.then(data => this.props.addToFavorites(data.tastes))
-	}
+	// 	deleteFromFavorites(this.props.userData.id, byeWl.id)	
+	// 	.then(() => getFavorites(this.props.userData.id))
+	// 	.then(data => this.props.addToFavorites(data.tastes))
+	// }
 
 	render() {
 		const opts = {
@@ -90,26 +90,26 @@ class SearchIndResults extends Component {
 				return null;
 		}	
 
-		const addBtn = 
-			<Label className='search-to-wl'
-				as='a' color='olive'
-				onClick={() => postFavorite(this.props.searchedData, this.props.userData.id)
-					.then(() => getFavorites(this.props.userData.id))
-					.then(data => this.props.addToFavorites(data.tastes))}>
-				<i className='add icon' />ADD</Label>
+		// const addBtn = 
+		// 	<Label className='search-to-wl'
+		// 		as='a' color='olive'
+		// 		onClick={() => postFavorite(this.props.searchedData, this.props.userData.id)
+		// 			.then(() => getFavorites(this.props.userData.id))
+		// 			.then(data => this.props.addToFavorites(data.tastes))}>
+		// 		<i className='add icon' />ADD</Label>
 		
-		const removeBtn = 
-			<Label className='search-to-wl'
-				as='a' color='black' onClick={() => this.handleRemove(this.props.searchedData)}>
-				<i className='remove icon'/>REMOVE</Label>
+		// const removeBtn = 
+		// 	<Label className='search-to-wl'
+		// 		as='a' color='black' onClick={() => this.handleRemove(this.props.searchedData)}>
+		// 		<i className='remove icon'/>REMOVE</Label>
 
-		let addOrRemove;
+		// let addOrRemove;
 
-		if (this.props.wavelength.find(wave => wave.name === this.props.searchedData.Name)) {
-			addOrRemove = removeBtn
-		} else {
-			addOrRemove = addBtn
-		}
+		// if (this.props.wavelength.find(wave => wave.name === this.props.searchedData.Name)) {
+		// 	addOrRemove = removeBtn
+		// } else {
+		// 	addOrRemove = addBtn
+		// }
 
 		return (
 			this.props.result === false || this.props.userSearch === '' ? 
@@ -124,7 +124,7 @@ class SearchIndResults extends Component {
 				<br/>
 				<h4 className='blue-labels'>{Name}</h4>
 				{tagType}
-				{addOrRemove}
+				{/* {addOrRemove} */}
 
 				{yUrl === undefined || null ? null :
 				<YouTube
@@ -152,4 +152,4 @@ const mapStateToProps = state => {
 	})
 }
 
-export default connect(mapStateToProps, { addToFavorites })(SearchIndResults)
+export default connect(mapStateToProps)(SearchIndResults)
