@@ -82,9 +82,15 @@ class MyWavelength extends Component {
 						onChange={this.handleChange}
 					/>
 				</span>
-				<Container id='my-wl-container'>			
-					{wavelength}
-				</Container>
+				{wavelength.length > 0 ?
+					<Container id='my-wl-container'>
+						{wavelength}
+					</Container>
+					:
+					<Container id='my-wl-container'>
+						<h4 className='result-name' id='fix-dropdown'>nothing here yet!</h4>
+					</Container>
+				}
 			</div>
 		)
 	}
