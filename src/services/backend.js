@@ -45,8 +45,8 @@ export const fetchSearch = (query, genre = '') => {
 
 ///////////// POST TO FAVORITES /////////////
 
-export const postFavorite = (wavelength, userId) => {
-	return fetch(`${LOCALAPI}/tastes`, {
+export const postFavorite = (wavelength, userId, likes = 0) => {
+return fetch(`${LOCALAPI}/tastes`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -59,7 +59,8 @@ export const postFavorite = (wavelength, userId) => {
 			teaser: wavelength.wTeaser,
 			wUrl: wavelength.wUrl,
 			yUrl: wavelength.yUrl,
-			yID: wavelength.yID
+			yID: wavelength.yID,
+			likes: likes
 		})
 	}).then(res => res.json())
 }
@@ -82,6 +83,30 @@ export const deleteFromFavorites = (userId, tasteId) => {
 		body: JSON.stringify({
 			user_id: userId,
 			taste_id: tasteId
+		})
+	})
+}
+
+export const increaseLike = (id, likes) => {
+	return fetch(`${LOCALAPI}/tastes/${id}`, {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			likes: likes += 1
+		})
+	})
+}
+
+export const decreaseLike = (id, likes) => {
+	return fetch(`${LOCALAPI}/tastes/${id}`, {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			likes: likes -= 1
 		})
 	})
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addToFavorites } from '../../actions/allActions'
-import { postFavorite, getFavorites, deleteFromFavorites } from '../../services/backend';
+import { postFavorite, getFavorites, deleteFromFavorites, increaseLike, decreaseLike } from '../../services/backend';
 import { Card, Label, Button, Modal, Embed } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
@@ -13,12 +13,20 @@ class RecCard extends Component {
 	}
 
 	handleClick = () => this.setState({ active: true })
+	
+	handleAdd = () => {
+		postFavorite(this.props.rec, this.props.userData.id)
+		.then(data => increaseLike(data.id, data.likes))	
+		.then(() => getFavorites(this.props.userData.id))	
+		.then(data => this.props.addToFavorites(data.tastes))
+	}
 
 	// for removing wavelength
 	handleRemove = () => {
 		let byeWl = this.props.wavelength.find(fav => fav.name === this.props.rec.Name)
 			
-		deleteFromFavorites(this.props.userData.id, byeWl.id)	
+		deleteFromFavorites(this.props.userData.id, byeWl.id)
+		.then(() => decreaseLike(byeWl.id, byeWl.likes))
 		.then(() => getFavorites(this.props.userData.id))
 		.then(data => this.props.addToFavorites(data.tastes))
 	}
@@ -82,9 +90,7 @@ class RecCard extends Component {
 		const addBtn = 
 			<Label className='rec-to-wl'
 				as='a' color='olive'
-				onClick={() => postFavorite(this.props.rec, this.props.userData.id)
-					.then(() => getFavorites(this.props.userData.id))
-					.then(data => this.props.addToFavorites(data.tastes))}>
+				onClick={() => this.handleAdd(this.props.rec)}>
 				<i className='add icon' />ADD</Label>
 		
 		const removeBtn = 
