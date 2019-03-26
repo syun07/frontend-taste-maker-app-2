@@ -2,16 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import YouTube from 'react-youtube';
 import { addToFavorites } from '../../actions/allActions'
-import { postFavorite, getFavorites, deleteFromFavorites } from '../../services/backend';
+import { postFavorite, getFavorites, deleteFromFavorites, increaseLike, decreaseLike } from '../../services/backend';
 import { Container, Label } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
 
 class SearchIndResults extends Component {
 
+	handleAdd = () => {
+		postFavorite(this.props.searchedData, this.props.userData.id)
+		.then(data => increaseLike(data.id, data.likes))
+		.then(() => getFavorites(this.props.userData.id))
+		.then(data => this.props.addToFavorites(data.tastes))
+	}
+
 	handleRemove = () => {
 		let byeWl = this.props.wavelength.find(fav => fav.name === this.props.searchedData.Name)
 			
-		deleteFromFavorites(this.props.userData.id, byeWl.id)	
+		deleteFromFavorites(this.props.userData.id, byeWl.id)
+		.then(() => decreaseLike(byeWl.id, byeWl.likes))
 		.then(() => getFavorites(this.props.userData.id))
 		.then(data => this.props.addToFavorites(data.tastes))
 	}
@@ -79,9 +87,7 @@ class SearchIndResults extends Component {
 		const addBtn = 
 			<Label id='search-to-wl'
 				as='a' color='olive'
-				onClick={() => postFavorite(this.props.searchedData, this.props.userData.id)
-					.then(() => getFavorites(this.props.userData.id))
-					.then(data => this.props.addToFavorites(data.tastes))}>
+				onClick={() => this.handleAdd(this.props.searchedData)}>
 				<i className='add icon' />ADD</Label>
 		
 		const removeBtn = 

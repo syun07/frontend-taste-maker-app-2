@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteFromFavorites, getFavorites } from '../../services/backend';
+import { addToFavorites } from '../../actions/allActions'
+import { deleteFromFavorites, getFavorites, decreaseLike } from '../../services/backend';
 import { Card, Button, Label, Modal, Embed } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
@@ -16,6 +17,7 @@ class MyWLCard extends Component {
 		let byeWl = this.props.wavelength.find(fav => fav.name === this.props.wave.name)
 
 		deleteFromFavorites(this.props.userData.id, byeWl.id)
+		.then(() => decreaseLike(byeWl.id, byeWl.likes))
 		.then(() => getFavorites(this.props.userData.id))
 		.then(data => this.props.addToFavorites(data.tastes))
 	} 
@@ -125,4 +127,4 @@ const mapStateToProps = state => {
 	})
 }
 
-export default connect(mapStateToProps)(MyWLCard);
+export default connect(mapStateToProps, {addToFavorites})(MyWLCard);
