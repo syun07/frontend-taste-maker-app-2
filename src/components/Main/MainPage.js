@@ -28,11 +28,11 @@ class MainPage extends Component {
 	}
 
 	clearData = () => {
+		this.props.saveSearch('')
+		this.props.handleResult(false)
 		this.props.getSearchedData({})
 		this.props.getRecData([])
-		this.props.saveSearch('')
 		this.props.handleTypeChange('results')
-		this.props.handleResult(false)
 	}
 
 	// changes activeItem state & props 
@@ -40,6 +40,7 @@ class MainPage extends Component {
 		this.setState({
 			activeItem: clicked
 		})
+		this.clearData()
 		this.props.changePage(clicked)
 	}
 
@@ -55,6 +56,11 @@ class MainPage extends Component {
 					name='EXPLORE'
 					active={this.state.activeItem === 'explore'}
 					onClick={() => this.handleItemClick('explore')} />
+				
+				<Menu.Item
+					name='TRENDING'
+					active={this.state.activeItem === 'trending'}
+					onClick={() => this.handleItemClick('trending')} />
 				
 				<Menu.Item
 					name='MY WAVELENGTH'
@@ -92,12 +98,10 @@ class MainPage extends Component {
 		
 		if (this.props.activeItem === 'home') {
 			page = homePage
-			this.clearData()
 			getFavorites(this.props.userData.id).then(data => this.props.addToFavorites(data.tastes))
 			getTrending().then(data => this.props.addToTrending(data))
 		} else if (this.props.activeItem === 'explore') {
 			page = searchIndPage
-			this.clearData()
 		} else if (this.props.activeItem === 'wavelength') {
 			page = wavelength
 		} else if (this.props.activeItem === 'logout') {

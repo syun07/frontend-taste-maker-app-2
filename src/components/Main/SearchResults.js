@@ -13,34 +13,46 @@ class SearchResults extends Component {
 
 		const mappedTrending = this.props.trending.map((wave, index) =>
 			<MyWLCard key={index} id={index} wave={wave} />
-		)
+			)
+			
+		// invalid search
+		const noResults =
+		<p className='result-name'>Please enter a valid search</p>
 
-		// // no wavelength found
-		// const wasOrWere = this.props.searchType === 'music' ? 'was' : 'were'
-	
-		// const noWavelength =
-		// 	<p className='result-name'>Sorry, there {wasOrWere} no {this.props.searchType} found on the same wavelength as {this.props.userSearch}</p>
+		// no wavelength found
+		const wasOrWere = this.props.searchType === 'music' ? 'was' : 'were'
 		
-		// // invalid search
-		// const noResults =
-		// 	<p className='result-name'>Please enter a valid search</p>
+		const noWavelength =
+			<p className='result-name'>Sorry, there {wasOrWere} no {this.props.searchType} found on the same wavelength as {this.props.userSearch}</p>
 		
 		// let message;
 
 		// this.props.searchType === 'results' ? message = noResults : message = noWavelength
 
+		let trendingOrInvalidSearch;
+
+		if (this.props.userSearch === '') {
+			trendingOrInvalidSearch = mappedTrending 
+		} else if (this.props.userSearch.length > 1 && this.props.recData.length < 1 && this.props.searchType === 'results') {
+			trendingOrInvalidSearch = noResults
+		}
+
+		let resultsOrNoWavelength;
+
+		if (this.props.recData.length >= 1) {
+			resultsOrNoWavelength = mappedResults
+		} else if (this.props.recData.length < 1) {
+			resultsOrNoWavelength = noWavelength
+		}
+
 		return (
 			this.props.result === false ?
 				<Container id='my-wl-container'>
-					{mappedTrending}
+					{trendingOrInvalidSearch}
 				</Container>
-			// this.props.recData.length === 0 && this.props.userSearch.length > 0 ?
-			// 	<Container className='searched-result-container'>
-			// 		{message}
-			// 	</Container>
 				:
 			<Container id='rec-cards-container'>
-				{mappedResults}
+				{resultsOrNoWavelength}
 			</Container>
 		)	
 	}
