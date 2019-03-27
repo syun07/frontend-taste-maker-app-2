@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RecCard from '../Main/RecCard'
+import MyWLCard from '../Main/MyWLCard'
 import { Container } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
 
@@ -9,7 +10,13 @@ class SearchResults extends Component {
 		const mappedResults = this.props.recData.map((rec, index) =>
 			<RecCard key={index} id={index} rec={rec} />
 		)
-		
+
+		const mappedTrending = this.props.trending.map((wave, index) =>
+			<MyWLCard key={index} wave={wave} />
+		)
+
+		console.log(this.props.wavelength)
+
 		// no wavelength found
 		const wasOrWere = this.props.searchType === 'music' ? 'was' : 'were'
 	
@@ -25,10 +32,13 @@ class SearchResults extends Component {
 		this.props.searchType === 'results' ? message = noResults : message = noWavelength
 
 		return (
-			this.props.result === false ?
-			<Container className='searched-result-container'>
-				{message}
-			</Container>
+			this.props.recData.length === 0 && this.props.userSearch.length > 0 ?
+				// <Container id='my-wl-container'>
+				// 	{/* {mappedTrending} */}
+				// </Container>
+				<Container className='searched-result-container'>
+					{message}
+				</Container>
 				:
 			<Container id='rec-cards-container'>
 				{mappedResults}
@@ -43,7 +53,9 @@ const mapStateToProps = state => {
 		result: state.result,
 		userSearch: state.userSearch,
 		searchType: state.searchType,
-		recData: state.recData
+		recData: state.recData,
+		trending: state.trending,
+		wavelength: state.wavelength
 	})
 }
 

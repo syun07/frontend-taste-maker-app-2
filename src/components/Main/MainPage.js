@@ -5,8 +5,8 @@ import SearchResults from '../Main/SearchResults';
 import SearchIndividual from '../Main/SearchIndividual';
 import SearchIndResults from '../Main/SearchIndResults';
 import MyWLContainer from './MyWLContainer';
-import { changePage, changeLogin, goBack, addToFavorites } from '../../actions/allActions';
-import { getFavorites } from '../../services/backend'
+import { changePage, changeLogin, goBack, addToFavorites, addToTrending, getSearchedData, getRecData, saveSearch, handleResult} from '../../actions/allActions';
+import { getFavorites, getTrending } from '../../services/backend'
 import { Container, Menu } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
 
@@ -23,6 +23,10 @@ class MainPage extends Component {
 	logOut = () => {
 		this.props.changeLogin(false)
 		this.props.goBack()
+		this.props.getSearchedData({})
+		this.props.getRecData([])
+		this.props.saveSearch('')
+		this.props.handleResult(false)
 		localStorage.clear()
 	}
 
@@ -84,12 +88,13 @@ class MainPage extends Component {
 		if (this.props.activeItem === 'home') {
 			page = homePage
 			getFavorites(this.props.userData.id).then(data => this.props.addToFavorites(data.tastes))
+			getTrending().then(data => this.props.addToTrending(data))
 		} else if (this.props.activeItem === 'explore') {
 			page = searchIndPage
 		} else if (this.props.activeItem === 'wavelength') {
 			page = wavelength
 		} else if (this.props.activeItem === 'logout') {
-			window.location.reload()
+			Location.reload(true)
 		}
 		
 		return (
@@ -109,4 +114,4 @@ const mapStateToProps = state => {
 	})
 }
 
-export default connect(mapStateToProps, { changePage, changeLogin, goBack, addToFavorites })(MainPage);
+export default connect(mapStateToProps, { changePage, changeLogin, goBack, addToFavorites, addToTrending, getSearchedData, getRecData, saveSearch, handleResult})(MainPage);

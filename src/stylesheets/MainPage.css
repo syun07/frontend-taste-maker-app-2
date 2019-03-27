@@ -45,10 +45,6 @@
 
 /* search input container */
 .ui.container .search-input-container {
-	background-image: url(../images/background.png);
-	background-size: cover;
-	border-radius: 45px;
-	padding: 10px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -69,7 +65,7 @@
 	margin-top: 2em;
 	text-align: center;
 	align-items: center;
-	width: 60%;
+	width: fit-content;
 	height: 100%;
 	border-radius: 45px;
 	padding: 1em;
@@ -153,7 +149,7 @@
 	flex-flow: row wrap;
 	text-align: center;
 	justify-content: center;
-	width: 90%;
+	width: 95vw;
 }
 
 #result-name-desc {

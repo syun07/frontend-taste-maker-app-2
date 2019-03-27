@@ -119,7 +119,8 @@ class SearchInput extends Component {
 				{showMoreBtn}
 				<br/>
 
-				{this.props.result === false ? null :
+				{this.props.result === false ? null
+					:
 					<p className='result-name' id='result-name-desc'>{type} ON THE SAME WAVELENGTH AS {this.props.userSearch}</p>}
 				
 			</Container>

@@ -110,3 +110,12 @@ export const decreaseLike = (id, likes) => {
 		})
 	})
 }
+
+export const getTrending = () => {
+	return fetch(`${LOCALAPI}/tastes`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}).then(res => res.json())
+}

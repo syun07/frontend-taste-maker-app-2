@@ -88,7 +88,7 @@ class MyWavelength extends Component {
 					</Container>
 					:
 					<Container id='my-wl-container'>
-						<h4 className='result-name' id='fix-dropdown'>nothing here yet!</h4>
+						<p className='result-name' id='fix-dropdown'>nothing here yet!</p>
 					</Container>
 				}
 			</div>

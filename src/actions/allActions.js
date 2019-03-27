@@ -95,3 +95,10 @@ export const addToFavorites = wavelength => {
 		type: 'ADD_TO_FAVORITES', wavelength
 	}
 }
+
+//////////////// TRENDING ////////////////
+export const addToTrending = trending => {
+	return {
+		type: 'ADD_TO_TRENDING', trending
+	}
+}

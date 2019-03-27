@@ -19,7 +19,9 @@ let initialState = {
 	result: false,
 
 	// wavelength, fetch all associated with user upon login
-	wavelength: []
+	wavelength: [],
+
+	trending: []
 }
 
 export default (state = initialState, action) => {
@@ -64,7 +66,10 @@ export default (state = initialState, action) => {
 			return { ...state, result: action.result }
 		
 		case 'ADD_TO_FAVORITES':
-			return { ...state, wavelength: action.wavelength}
+			return { ...state, wavelength: action.wavelength }
+		
+		case 'ADD_TO_TRENDING':
+			return { ...state, trending: action.trending }
 	
 		default:
 			return state
