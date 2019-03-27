@@ -5,7 +5,7 @@ import SearchResults from '../Main/SearchResults';
 import SearchIndividual from '../Main/SearchIndividual';
 import SearchIndResults from '../Main/SearchIndResults';
 import MyWLContainer from './MyWLContainer';
-import { changePage, changeLogin, goBack, addToFavorites, addToTrending, getSearchedData, getRecData, saveSearch, handleResult} from '../../actions/allActions';
+import { changePage, changeLogin, goBack, addToFavorites, addToTrending, getSearchedData, getRecData, saveSearch, handleResult, handleTypeChange} from '../../actions/allActions';
 import { getFavorites, getTrending } from '../../services/backend'
 import { Container, Menu } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
@@ -23,11 +23,16 @@ class MainPage extends Component {
 	logOut = () => {
 		this.props.changeLogin(false)
 		this.props.goBack()
+		localStorage.clear()
+		this.clearData()
+	}
+
+	clearData = () => {
 		this.props.getSearchedData({})
 		this.props.getRecData([])
 		this.props.saveSearch('')
+		this.props.handleTypeChange('results')
 		this.props.handleResult(false)
-		localStorage.clear()
 	}
 
 	// changes activeItem state & props 
@@ -87,10 +92,12 @@ class MainPage extends Component {
 		
 		if (this.props.activeItem === 'home') {
 			page = homePage
+			this.clearData()
 			getFavorites(this.props.userData.id).then(data => this.props.addToFavorites(data.tastes))
 			getTrending().then(data => this.props.addToTrending(data))
 		} else if (this.props.activeItem === 'explore') {
 			page = searchIndPage
+			this.clearData()
 		} else if (this.props.activeItem === 'wavelength') {
 			page = wavelength
 		} else if (this.props.activeItem === 'logout') {
@@ -114,4 +121,4 @@ const mapStateToProps = state => {
 	})
 }
 
-export default connect(mapStateToProps, { changePage, changeLogin, goBack, addToFavorites, addToTrending, getSearchedData, getRecData, saveSearch, handleResult})(MainPage);
+export default connect(mapStateToProps, { changePage, changeLogin, goBack, addToFavorites, addToTrending, getSearchedData, getRecData, saveSearch, handleResult,handleTypeChange})(MainPage);

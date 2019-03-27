@@ -10,15 +10,15 @@ class MyWLCard extends Component {
 	state = {
 		active: null
 	}
-	
+
 	handleClick = () => this.setState({ active: true })
 	
-	// handleAdd = () => {
-	// 	postFavorite(this.props.wave, this.props.userData.id)
-	// 	.then(data => increaseLike(data.id, data.likes))	
-	// 	.then(() => getFavorites(this.props.userData.id))	
-	// 	.then(data => this.props.addToFavorites(data.tastes))
-	// }
+	handleAdd = () => {
+		postFavorite(this.props.wave, this.props.userData.id)
+		.then(data => increaseLike(data.id, data.likes))	
+		.then(() => getFavorites(this.props.userData.id))	
+		.then(data => this.props.addToFavorites(data.tastes))
+	}
 
 	handleRemove = () => {
 		let byeWl = this.props.wavelength.find(fav => fav.name === this.props.wave.name)
@@ -96,12 +96,14 @@ class MyWLCard extends Component {
 				<i className='remove icon'/>REMOVE</Label>
 
 		let addOrRemove;
-		console.log(this.props.wavelength)
+		// console.log(this.props.wave, this.props.wavelength)
+
+		
 
 
-		if (this.props.wavelength.find(wave => wave.name === this.props.wave.name)) {
-			console.log('hi')
-		}
+		// if (this.props.wavelength.find(wave => wave.name === this.props.wave.name)) {
+		// // 	console.log('hi')
+		// // }
 		// 	addOrRemove = removeBtn
 		// } else {
 		// 	addOrRemove = addBtn

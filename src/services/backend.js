@@ -65,8 +65,8 @@ return fetch(`${LOCALAPI}/tastes`, {
 	}).then(res => res.json())
 }
 
-export const getFavorites = (userId) => {
-	return fetch(`${LOCALAPI}/users/${userId}`, {
+export async function getFavorites(userId) {
+	return await fetch(`${LOCALAPI}/users/${userId}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
