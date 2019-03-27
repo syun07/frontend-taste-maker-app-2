@@ -65,6 +65,26 @@ return fetch(`${LOCALAPI}/tastes`, {
 	}).then(res => res.json())
 }
 
+export const postTrending = (wavelength, userId) => {
+	return fetch(`${LOCALAPI}/tastes`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json'
+			},
+			body: JSON.stringify({
+				userID: userId,
+				name: wavelength.name,
+				genre: wavelength.genre,
+				teaser: wavelength.teaser,
+				wUrl: wavelength.wUrl,
+				yUrl: wavelength.yUrl,
+				yID: wavelength.yID,
+				likes: wavelength.likes
+			})
+		}).then(res => res.json())
+	}
+
 export async function getFavorites(userId) {
 	return await fetch(`${LOCALAPI}/users/${userId}`, {
 		method: 'GET',

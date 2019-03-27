@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addToFavorites } from '../../actions/allActions'
-import { deleteFromFavorites, postFavorite, getFavorites, increaseLike, decreaseLike } from '../../services/backend';
+import { deleteFromFavorites, postTrending, getFavorites, increaseLike, decreaseLike } from '../../services/backend';
 import { Card, Button, Label, Modal, Embed } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
@@ -14,10 +14,11 @@ class MyWLCard extends Component {
 	handleClick = () => this.setState({ active: true })
 	
 	handleAdd = () => {
-		postFavorite(this.props.wave, this.props.userData.id)
-		.then(data => increaseLike(data.id, data.likes))	
+		postTrending(this.props.wave, this.props.userData.id)
+		.then(data => increaseLike(data.id, data.likes))
 		.then(() => getFavorites(this.props.userData.id))	
 		.then(data => this.props.addToFavorites(data.tastes))
+		.then(this.increaseNumber())
 	}
 
 	handleRemove = () => {
@@ -27,10 +28,19 @@ class MyWLCard extends Component {
 		.then(() => decreaseLike(byeWl.id, byeWl.likes))
 		.then(() => getFavorites(this.props.userData.id))
 		.then(data => this.props.addToFavorites(data.tastes))
+		.then(this.decreaseNumber())
 	} 
 
+	increaseNumber = () => {
+		this.props.wave.likes += 1
+	}
+
+	decreaseNumber = () => {
+		this.props.wave.likes -= 1
+	}
+
 	render() {
-		const { name, genre, teaser, wUrl, yID } = this.props.wave
+		const { name, genre, teaser, wUrl, yID, likes } = this.props.wave
 
 		const musicTag =
 		<Label id='music' className='rec-tag' as='a' ribbon>
@@ -96,31 +106,22 @@ class MyWLCard extends Component {
 				<i className='remove icon'/>REMOVE</Label>
 
 		let addOrRemove;
-		// console.log(this.props.wave, this.props.wavelength)
 
-		
-
-
-		// if (this.props.wavelength.find(wave => wave.name === this.props.wave.name)) {
-		// // 	console.log('hi')
-		// // }
-		// 	addOrRemove = removeBtn
-		// } else {
-		// 	addOrRemove = addBtn
-		// }
-
+		this.props.wavelength.find(wave => wave.name === this.props.wave.name) ?
+			addOrRemove = removeBtn : addOrRemove = addBtn
+			
 		return ( 
 			<Card id='rec-card'>
 				<Card.Content>
 					{tagType}
 					{addOrRemove}
-					{/* <Label className='rec-to-wl'
-						as='a' color='black' onClick={() => this.handleRemove(this.props.wave)}>
-						<i className='remove icon' />REMOVE</Label> */}
 					
 					<br /><br />
 					
 					<Card.Header className='result-name'>{name.slice(0, 30)}</Card.Header>
+					<Card.Meta>
+						<i className='heart outline icon' /> {likes}
+					</Card.Meta>
 
 
 					<Card.Description>
@@ -154,6 +155,7 @@ class MyWLCard extends Component {
 }
 
 const mapStateToProps = state => {
+	console.log(state)
 	return ({
 		wavelength: state.wavelength,
 		userData: state.userData

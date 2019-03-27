@@ -170,7 +170,6 @@
 
 /* my wavelength */
 .ui.container #my-wl-container {
-	margin-top: 2em;
 	display: flex;
 	flex-flow: row wrap;
 	text-align: center;

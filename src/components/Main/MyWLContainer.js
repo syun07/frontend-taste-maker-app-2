@@ -74,14 +74,14 @@ class MyWavelength extends Component {
 		
 		return ( 
 			<div className='my-wavelength-page'>
-				<span className='search-input-container'>
+				<h5 className='search-input-container'>
 					FILTER MY WAVELENGTH BY
 					<Dropdown inline
 						options={options}
 						defaultValue={options[0].value}
 						onChange={this.handleChange}
 					/>
-				</span>
+				</h5>
 				{wavelength.length > 0 ?
 					<Container id='my-wl-container'>
 						{wavelength}

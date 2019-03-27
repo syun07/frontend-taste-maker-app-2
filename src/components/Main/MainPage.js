@@ -4,6 +4,7 @@ import SearchInput from '../Main/SearchInput';
 import SearchResults from '../Main/SearchResults';
 import SearchIndividual from '../Main/SearchIndividual';
 import SearchIndResults from '../Main/SearchIndResults';
+import TrendingPage from '../Main/TrendingPage';
 import MyWLContainer from './MyWLContainer';
 import { changePage, changeLogin, goBack, addToFavorites, addToTrending, getSearchedData, getRecData, saveSearch, handleResult, handleTypeChange} from '../../actions/allActions';
 import { getFavorites, getTrending } from '../../services/backend'
@@ -93,6 +94,12 @@ class MainPage extends Component {
 				<MyWLContainer />
 			</Container>
 		
+		const trending = 
+			<Container className='search-page-container'>
+				<h5 className='search-input-container'>TRENDING SEARCHES</h5>
+				<TrendingPage />
+			</Container>
+		
 
 		let page;
 		
@@ -102,6 +109,8 @@ class MainPage extends Component {
 			getTrending().then(data => this.props.addToTrending(data))
 		} else if (this.props.activeItem === 'explore') {
 			page = searchIndPage
+		} else if (this.props.activeItem === 'trending') {
+			page = trending
 		} else if (this.props.activeItem === 'wavelength') {
 			page = wavelength
 		} else if (this.props.activeItem === 'logout') {
