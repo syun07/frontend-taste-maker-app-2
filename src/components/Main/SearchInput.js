@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ShowMoreBtn from '../Main/ShowMoreBtn'
 import { saveSearch, handleTypeChange, getSearchedData, getRecData, handleResult } from '../../actions/allActions'
-import { fetchSearch } from '../../services/backend';
-import { Input, Container, Button, Modal, Embed } from 'semantic-ui-react';
+import { fetchSearch, postFavorite } from '../../services/backend';
+import { Input, Container, Button, Modal, Embed, Label } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
 class SearchInput extends Component {
-	state = {
-		active: null
-	}
-	
-	handleModalClick = () => this.setState({ active: true })
 
 	// event listener for typing in input
 	handleChange = event => {
@@ -41,31 +37,13 @@ class SearchInput extends Component {
 			})
 		}
 	}
-	
+
 	render() {
 		const type = this.props.searchType === '' ? 'All Categories' : this.props.searchType
 
 		const show =
-			<Modal id='modal' trigger=
-				{<Button inverted id='web' onClick={this.handleModalClick}>
-					MORE INFORMATION ON {this.props.searchedData.Name}</Button>}>			
-				
-				<Modal.Header id='modal-header'>
-					<h3 className='blue-labels'>{this.props.searchedData.Name}</h3>
-				</Modal.Header>
-
-				<Modal.Content scrolling>
-					<Embed id={this.props.searchedData.yID} source='youtube' active={this.state.active} />
-					<br />
-
-					<Modal.Description>
-						<p>{this.props.searchedData.wTeaser}</p>
-						<a href={this.props.searchedData.wUrl}>Read more about {this.props.searchedData.Name}</a>
-					</Modal.Description>
-
-				</Modal.Content>
-			</Modal>
-		
+			<ShowMoreBtn />
+			
 		let showMoreBtn
 
 		this.props.result ? showMoreBtn = show : showMoreBtn = null
@@ -120,8 +98,8 @@ class SearchInput extends Component {
 				{this.props.result ?
 					<p className='result-name' id='result-name-desc'>{type} ON THE SAME WAVELENGTH AS {this.props.searchedData.Name}</p> : null}
 				{this.props.userSearch === '' ? <p className='result-name' id='result-name-desc'>TRENDING SEARCHES</p> : null}
-				{showMoreBtn}
 
+				{showMoreBtn}
 				
 			</Container>
 		)

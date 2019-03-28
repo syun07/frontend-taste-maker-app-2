@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addToFavorites } from '../../actions/allActions'
-import { postFavorite, getFavorites, deleteFromFavorites, increaseLike, decreaseLike } from '../../services/backend';
-import { Card, Label, Button, Modal, Embed } from 'semantic-ui-react';
+import { postFavorite, increaseLike, decreaseLike, getFavorites, deleteFromFavorites } from '../../services/backend';
+import { addToFavorites } from '../../actions/allActions';
+
+import { Button, Modal, Embed, Label } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
-class RecCard extends Component {
-	
-	// for youtube video
+class ShowMoreBtn extends Component {
 	state = {
 		active: null
 	}
-
-	handleClick = () => this.setState({ active: true })
 	
+	handleModalClick = () => this.setState({ active: true })
+
 	handleAdd = () => {
-		postFavorite(this.props.rec, this.props.userData.id)
+		postFavorite(this.props.searchedData, this.props.userData.id)
 		.then(data => increaseLike(data.id, data.likes))	
 		.then(() => getFavorites(this.props.userData.id))	
 		.then(data => this.props.addToFavorites(data.tastes))
 	}
 
-	// for removing wavelength
 	handleRemove = () => {
-		let byeWl = this.props.wavelength.find(fav => fav.name === this.props.rec.Name)
+		let byeWl = this.props.wavelength.find(fav => fav.name === this.props.searchedData.Name)
 			
 		deleteFromFavorites(this.props.userData.id, byeWl.id)
 		.then(() => decreaseLike(byeWl.id, byeWl.likes))
@@ -31,8 +29,9 @@ class RecCard extends Component {
 		.then(data => this.props.addToFavorites(data.tastes))
 	}
 
-	render() {	
-		const { Name, Type, wTeaser, yID, wUrl } = this.props.rec
+	render() {
+
+		const { Type } = this.props.searchedData
 
 		const musicTag =
 			<Label id='music' className='rec-tag' as='a' ribbon>
@@ -86,71 +85,57 @@ class RecCard extends Component {
 				return null;
 		}	
 
-		
 		const addBtn = 
 			<Label className='rec-to-wl'
 				as='a' color='olive'
-				onClick={() => this.handleAdd(this.props.rec)}>
+				onClick={() => this.handleAdd(this.props.searchedData)}>
 				<i className='add icon' />ADD</Label>
 		
 		const removeBtn = 
 			<Label className='rec-to-wl'
-				as='a' color='black' onClick={() => this.handleRemove(this.props.rec)}>
+				as='a' color='black' onClick={() => this.handleRemove(this.props.searchedData)}>
 				<i className='remove icon'/>REMOVE</Label>
 
 		let addOrRemove;
 
-		if (this.props.wavelength.find(wave => wave.name === this.props.rec.Name)) {
+		if (this.props.wavelength.find(wave => wave.name === this.props.searchedData.Name)) {
 			addOrRemove = removeBtn
 		} else {
 			addOrRemove = addBtn
 		}
 
 		return (
-			<Card id='rec-card'>
-				<Card.Content>
+			<Modal id='modal' trigger=
+				{<Button inverted id='web' onClick={this.handleModalClick}>
+					MORE INFORMATION ON {this.props.searchedData.Name}</Button>}>			
+				
+				<Modal.Header id='modal-header'>
 					{tagType}
 					{addOrRemove}
-					<br /><br />
-					
-					<Card.Header className='result-name'>{Name.slice(0, 30)}</Card.Header>
+					<h3 className='blue-labels'>{this.props.searchedData.Name}</h3>
+				</Modal.Header>
 
-					<Card.Description>
-						<p className='card-description'>{wTeaser.slice(0, 600)}...</p>
-					</Card.Description>
+				<Modal.Content scrolling>
+					<Embed id={this.props.searchedData.yID} source='youtube' active={this.state.active} />
+					<br />
 
-					<Modal id='modal' trigger=
-						{<Button className='see-more' onClick={this.handleClick}
-							basic color='black'>SEE MORE</Button>}>
-						
-						<Modal.Header id='modal-header'>						
-							{tagType}
-							{addOrRemove}
-							<h3 className='blue-labels'>{Name}</h3>
-						</Modal.Header>
+					<Modal.Description>
+						<p>{this.props.searchedData.wTeaser}</p>
+						<a href={this.props.searchedData.wUrl}>Read more about {this.props.searchedData.Name}</a>
+					</Modal.Description>
 
-						<Modal.Content scrolling>
-							<Embed id={yID} source='youtube' active={this.state.active} />
-								<br />
-							
-							<Modal.Description>
-								<p>{wTeaser}</p>
-								<a href={wUrl} target='_blank' rel='noopener noreferrer'>Read more about {Name}</a>
-							</Modal.Description>
-
-						</Modal.Content>
-					</Modal>
-				</Card.Content>
-			</Card>
+				</Modal.Content>
+			</Modal>
 		)
 	}
 }
 
 const mapStateToProps = state => {
-	return ({
+	return({
 		wavelength: state.wavelength,
+		searchedData: state.searchedData,
 		userData: state.userData
 	})
 }
 
-export default connect(mapStateToProps, { addToFavorites })(RecCard);
+export default connect(mapStateToProps, {addToFavorites})(ShowMoreBtn)
