@@ -263,3 +263,19 @@
 #fix-dropdown {
 	margin-top: 15em;
 }
+
+#trend-card {
+	height: fit-content;
+	margin: 15px;
+	justify-content: space-between
+}
+
+.see-more-trend {
+	letter-spacing: 2px;
+}
+
+.modal-likes {
+	font-size: 12px;
+	position: absolute;
+	top: 14%;
+}

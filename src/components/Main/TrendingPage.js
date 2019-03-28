@@ -7,8 +7,12 @@ import '../../stylesheets/MainPage.css';
 
 class TrendingPage extends Component {
 	render() {
-		const mappedTrending = this.props.trending.map((wave, index) =>
-		<MyWLCard key={index} id={index} wave={wave} />
+		const trending = this.props.trending.sort(function (a, b) {
+			return b.likes - a.likes
+		})
+
+		const mappedTrending = trending.map((wave, index) =>
+			wave.likes > 1 ? <MyWLCard key={index} id={index} wave={wave} /> : null
 		)
 		
 		return (

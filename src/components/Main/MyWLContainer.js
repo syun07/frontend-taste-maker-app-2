@@ -22,7 +22,12 @@ class MyWavelength extends Component {
 	render() {
 
 		// filter wavelength by genre
-		const filterWl = this.props.wavelength.filter(wave => 
+		console.log(this.props.wavelength[0].updated_at)
+		const sorted = this.props.wavelength.sort(function (a, b) {
+			return b.updated_at - a.updated_at
+		})
+
+		const filterWl = sorted.filter(wave => 
 			wave.genre === this.state.filterBy
 		)
 		
@@ -31,7 +36,7 @@ class MyWavelength extends Component {
 		)
 
 		// all wavelength
-		const allWl = this.props.wavelength.map(w =>
+		const allWl = sorted.map(w =>
 			<MyWLCard key={w.id} wave={w} />
 		)
 		

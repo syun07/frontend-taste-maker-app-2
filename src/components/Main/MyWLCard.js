@@ -132,12 +132,14 @@ class MyWLCard extends Component {
 						{<Button className='see-more' onClick={this.handleClick}
 							basic color='black'>SEE MORE</Button>}>
 						
-						<Modal.Header id='modal-header'>						
+						<Modal.Header id='modal-header'>	
+							{tagType}
+							{addOrRemove}
 							<h3 className='blue-labels'>{name}</h3>
+							<p className='modal-likes'><i className='heart outline icon' />{likes}</p>
 						</Modal.Header>
 
 						<Modal.Content scrolling>
-							
 							<Embed id={yID} source='youtube' active={this.state.active} />
 								<br />
 							

@@ -125,6 +125,8 @@ class RecCard extends Component {
 							basic color='black'>SEE MORE</Button>}>
 						
 						<Modal.Header id='modal-header'>						
+							{tagType}
+							{addOrRemove}
 							<h3 className='blue-labels'>{Name}</h3>
 						</Modal.Header>
 

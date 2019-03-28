@@ -105,7 +105,6 @@ class MainPage extends Component {
 		
 		if (this.props.activeItem === 'home') {
 			page = homePage
-			getFavorites(this.props.userData.id).then(data => this.props.addToFavorites(data.tastes))
 			getTrending().then(data => this.props.addToTrending(data))
 		} else if (this.props.activeItem === 'explore') {
 			page = searchIndPage

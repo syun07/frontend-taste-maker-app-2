@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { clickLogin, clickSignUp, changeLogin, goBack, setUserInfo } from '../../actions/allActions';
-import { addNewUser, getAuthToken, getUserInfo } from '../../services/backend';
+import { clickLogin, clickSignUp, changeLogin, goBack, setUserInfo, addToFavorites } from '../../actions/allActions';
+import { addNewUser, getAuthToken, getUserInfo, getFavorites } from '../../services/backend';
 import { Form, Button } from 'semantic-ui-react';
 import '../../stylesheets/LoginPage.css';
 
@@ -41,7 +41,9 @@ class LoginPage extends Component {
 				if (payload.user) {
 					localStorage.setItem("token", payload.jwt)
 
-					getUserInfo(payload.user.id).then((data) => this.props.setUserInfo(data))
+					getUserInfo(payload.user.id)
+						.then(data => this.props.setUserInfo(data) && getFavorites(data.id))
+						.then(data => this.props.addToFavorites(data.tastes))
 					this.props.changeLogin(true)
 			} else {
 				alert("INVALID LOGIN!")
@@ -137,8 +139,9 @@ class LoginPage extends Component {
 
 const mapStateToProps = state => {
 	return ({
-		form: state.form
+		form: state.form,
+		userData: state.userData
 	})
 }
 
-export default connect(mapStateToProps, { clickLogin, clickSignUp, changeLogin, goBack, setUserInfo })(LoginPage)
+export default connect(mapStateToProps, { clickLogin, clickSignUp, changeLogin, goBack, setUserInfo, addToFavorites })(LoginPage)

@@ -68,8 +68,7 @@ class SearchInput extends Component {
 		
 		let showMoreBtn
 
-		this.props.searchedData.Name ? showMoreBtn = show : showMoreBtn = null
-		// debugger
+		this.props.result ? showMoreBtn = show : showMoreBtn = null
 
 		return (
 			<Container className='search-input-container'>
@@ -118,8 +117,9 @@ class SearchInput extends Component {
 				</div>
 
 				<br/>
-				{this.props.searchedData.Name ?
-					<p className='result-name' id='result-name-desc'>{type} ON THE SAME WAVELENGTH AS {this.props.userSearch}</p> : null}
+				{this.props.result ?
+					<p className='result-name' id='result-name-desc'>{type} ON THE SAME WAVELENGTH AS {this.props.searchedData.Name}</p> : null}
+				{this.props.userSearch === '' ? <p className='result-name' id='result-name-desc'>TRENDING SEARCHES</p> : null}
 				{showMoreBtn}
 
 				
@@ -129,6 +129,7 @@ class SearchInput extends Component {
 }
 
 const mapStateToProps = state => {
+	console.log(state)
 	return ({
 		userSearch: state.userSearch,
 		searchType: state.searchType,
