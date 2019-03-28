@@ -145,7 +145,7 @@ class MyWLCard extends Component {
 							
 							<Modal.Description>
 								<p>{teaser}</p>
-								<a href={wUrl}>Read more about {name}</a>
+								<a href={wUrl} target='_blank' rel='noopener noreferrer'>Read more about {name}</a>
 							</Modal.Description>
 
 						</Modal.Content>

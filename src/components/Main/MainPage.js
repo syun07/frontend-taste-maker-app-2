@@ -7,7 +7,7 @@ import SearchIndResults from '../Main/SearchIndResults';
 import TrendingPage from '../Main/TrendingPage';
 import MyWLContainer from './MyWLContainer';
 import { changePage, changeLogin, goBack, addToFavorites, addToTrending, getSearchedData, getRecData, saveSearch, handleResult, handleTypeChange} from '../../actions/allActions';
-import { getFavorites, getTrending } from '../../services/backend'
+import { getTrending } from '../../services/backend'
 import { Container, Menu } from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css';
 

@@ -22,7 +22,6 @@ class MyWavelength extends Component {
 	render() {
 
 		// filter wavelength by genre
-		console.log(this.props.wavelength[0].updated_at)
 		const sorted = this.props.wavelength.sort(function (a, b) {
 			return b.updated_at - a.updated_at
 		})

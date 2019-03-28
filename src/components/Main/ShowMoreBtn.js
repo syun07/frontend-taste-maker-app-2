@@ -121,7 +121,7 @@ class ShowMoreBtn extends Component {
 
 					<Modal.Description>
 						<p>{this.props.searchedData.wTeaser}</p>
-						<a href={this.props.searchedData.wUrl}>Read more about {this.props.searchedData.Name}</a>
+						<a href={this.props.searchedData.wUrl} target='_blank' rel='noopener noreferrer'>Read more about {this.props.searchedData.Name}</a>
 					</Modal.Description>
 
 				</Modal.Content>

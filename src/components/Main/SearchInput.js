@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ShowMoreBtn from '../Main/ShowMoreBtn'
 import { saveSearch, handleTypeChange, getSearchedData, getRecData, handleResult } from '../../actions/allActions'
-import { fetchSearch, postFavorite } from '../../services/backend';
-import { Input, Container, Button, Modal, Embed, Label } from 'semantic-ui-react';
+import { fetchSearch } from '../../services/backend';
+import { Input, Container, Button} from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
 class SearchInput extends Component {
@@ -100,7 +100,7 @@ class SearchInput extends Component {
 				{this.props.userSearch === '' ? <p className='result-name' id='result-name-desc'>TRENDING SEARCHES</p> : null}
 
 				{showMoreBtn}
-				
+
 			</Container>
 		)
 	}

@@ -119,7 +119,7 @@ class SearchIndResults extends Component {
 				{yUrl === undefined || null ? null : <YouTube videoId={yID} opts={opts} />}
 				<br/>
 				<p>{wTeaser}</p>
-				<a href={wUrl}>Read More About {Name}</a>
+				<a href={wUrl} target='_blank' rel='noopener noreferrer'>Read More About {Name}</a>
 			</Container>
 		)
 	}

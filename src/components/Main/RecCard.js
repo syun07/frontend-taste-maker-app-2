@@ -86,7 +86,6 @@ class RecCard extends Component {
 				return null;
 		}	
 
-		
 		const addBtn = 
 			<Label className='rec-to-wl'
 				as='a' color='olive'
@@ -116,7 +115,7 @@ class RecCard extends Component {
 					<Card.Header className='result-name'>{Name.slice(0, 30)}</Card.Header>
 
 					<Card.Description>
-						<p className='card-description'>{wTeaser.slice(0, 600)}...</p>
+						<p className='card-description'>{wTeaser.slice(0, 550)}...</p>
 					</Card.Description>
 
 					<Modal id='modal' trigger=
