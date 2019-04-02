@@ -55,7 +55,7 @@ class LoginPage extends Component {
 		const buttonPage =
 			<div className='button-page-container'>
 				<div className='title-container'>
-					<h1 className='title-one'>Get on my</h1>
+					<h1 className='title-one'>Get On My</h1>
 					<h1 className='title-two'>WAVELENGTH</h1>
 				</div>
 			
