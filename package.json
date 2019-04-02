@@ -10,7 +10,6 @@
     "react-youtube": "^7.9.0",
     "redux": "^4.0.1",
     "remove-accents": "^0.4.2",
-    "semantic-ui": "^2.4.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.86.0"
   },
