@@ -115,7 +115,7 @@ class RecCard extends Component {
 					<Card.Header className='result-name'>{Name.slice(0, 30)}</Card.Header>
 
 					<Card.Description>
-						<p className='card-description'>{wTeaser.slice(0, 550)}...</p>
+						<p className='card-description'>{wTeaser.slice(0, 530)}...</p>
 					</Card.Description>
 
 					<Modal id='modal' trigger=

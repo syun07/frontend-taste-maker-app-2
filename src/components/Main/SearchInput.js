@@ -1,17 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ShowMoreBtn from '../Main/ShowMoreBtn'
-import { saveSearch, handleTypeChange, getSearchedData, getRecData, handleResult } from '../../actions/allActions'
+import { saveSearch, handleTypeChange, getSearchedData, getRecData, handleResult, addToTrending } from '../../actions/allActions'
 import { fetchSearch } from '../../services/backend';
 import { Input, Container, Button} from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
 class SearchInput extends Component {
+	// constructor() {
+	// 	super()
+
+	// 	this.state = {
+	// 		filterBy: 'all'
+	// 	}
+	// }
+
+	// handleTrending = (event, { value }) => {
+	// 	this.setState({
+	// 		filterBy: value
+	// 	})
+	// }
+
+
 
 	// event listener for typing in input
 	handleChange = event => {
 		this.props.saveSearch(event.target.value)
-		this.handleSearch(event.target.value, this.props.searchType)
+
+		// if (this.props.result) {
+			this.handleSearch(event.target.value, this.props.searchType)
+		// } else {
+		// 	const filterTrending = this.props.trending.filter(t => t.genre === this.props.searchType)
+		// 	this.props.addToTrending(filterTrending)
+		// }
 	}
 
 	// event listener for clicking on genre
@@ -112,8 +133,9 @@ const mapStateToProps = state => {
 		userSearch: state.userSearch,
 		searchType: state.searchType,
 		searchedData: state.searchedData,
-		result: state.result
+		result: state.result,
+		// trending: state.trending
 	})
 }
 
-export default connect(mapStateToProps, { saveSearch, handleTypeChange, getSearchedData, getRecData, handleResult })(SearchInput)
+export default connect(mapStateToProps, { saveSearch, handleTypeChange, getSearchedData, getRecData, handleResult, addToTrending })(SearchInput)

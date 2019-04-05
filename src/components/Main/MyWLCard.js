@@ -125,7 +125,7 @@ class MyWLCard extends Component {
 
 
 					<Card.Description>
-						<p className='card-description'>{teaser.slice(0, 600)}...</p>
+						<p className='card-description'>{teaser.slice(0, 550)}...</p>
 					</Card.Description>
 
 					<Modal id='modal' trigger=

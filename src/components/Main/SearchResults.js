@@ -15,7 +15,44 @@ class SearchResults extends Component {
 			return b.likes - a.likes
 		})
 
-		const mappedTrending = trending.map((wave, index) =>
+		let genre;
+
+		switch (this.props.searchType) {
+			case 'results':
+				break;
+			case 'music':
+				genre = 'music'
+				break;
+			case 'movies':
+				genre = 'movie'
+				break;
+			case 'shows':
+				genre = 'show'
+				break;
+			case 'podcasts':
+				genre = 'podcast'
+				break;
+			case 'books':
+				genre = 'book'
+				break;
+			case 'games':
+				genre = 'game'
+				break;
+			default:
+				return null;
+		} 
+
+		let filterTrending;
+
+		if (this.props.searchType === 'results') {
+			filterTrending = trending
+		} else {
+			filterTrending = trending.filter(t => t.genre === genre)
+		}
+
+		const limitResults = filterTrending.slice(0, 12)
+
+		const mappedTrending = limitResults.map((wave, index) =>
 			wave.likes > 1 ?
 					<MyWLCard key={index} id={index} wave={wave} />
 				: null
