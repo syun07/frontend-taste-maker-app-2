@@ -26,8 +26,17 @@ class LoginPage extends Component {
 	handleSubmit = event => {
 		event.preventDefault();
 		addNewUser(this.state.newName, this.state.newPassword)
-		event.target.reset()
-		this.props.clickLogin()
+			.then(getAuthToken({ name: this.state.newName, password: this.state.newPassword }))
+			.then(payload => {
+				if (payload.user) {
+					localStorage.setItem('token', payload.jwt)
+					getUserInfo(payload.user.id)
+						.then(data => this.props.setUserInfo(data))
+					this.props.changeLogin(true)
+				} else {
+					alert('INVALID LOGIN!')
+				}
+			})
 		this.setState({
 			newName: '',
 			newPassword: ''
@@ -46,7 +55,7 @@ class LoginPage extends Component {
 						.then(data => this.props.addToFavorites(data.tastes))
 					this.props.changeLogin(true)
 			} else {
-				alert("INVALID LOGIN!")
+				alert("That username is already taken!")
 			}
 		})
 	}
