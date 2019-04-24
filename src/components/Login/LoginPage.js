@@ -34,7 +34,7 @@ class LoginPage extends Component {
 						.then(data => this.props.setUserInfo(data))
 					this.props.changeLogin(true)
 				} else {
-					alert('INVALID LOGIN!')
+					alert('That username is already taken!')
 				}
 			})
 		this.setState({
@@ -55,7 +55,7 @@ class LoginPage extends Component {
 						.then(data => this.props.addToFavorites(data.tastes))
 					this.props.changeLogin(true)
 			} else {
-				alert("That username is already taken!")
+				alert("Invalid login!")
 			}
 		})
 	}

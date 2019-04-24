@@ -1,5 +1,4 @@
-// const LOCALAPI = 'https://still-harbor-31145.herokuapp.com/'
-const LOCALAPI = 'http://localhost:3000/'
+const LOCALAPI = 'https://still-harbor-31145.herokuapp.com/'
 
 ///////////// LOGIN /////////////
 export const 	getAuthToken = (loginInfo) => {
