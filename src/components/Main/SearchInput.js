@@ -128,7 +128,6 @@ class SearchInput extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log(state)
 	return ({
 		userSearch: state.userSearch,
 		searchType: state.searchType,

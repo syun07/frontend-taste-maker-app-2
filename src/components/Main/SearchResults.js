@@ -98,7 +98,6 @@ class SearchResults extends Component {
 }
 
 const mapStateToProps = state => {
-	// console.log(state)
 	return ({
 		result: state.result,
 		userSearch: state.userSearch,

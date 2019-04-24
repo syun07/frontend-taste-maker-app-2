@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { clickLogin, clickSignUp, changeLogin, goBack, setUserInfo, addToFavorites } from '../../actions/allActions';
+import { clickLogin, clickSignUp, loadScreen, changeLogin, goBack, setUserInfo, addToFavorites } from '../../actions/allActions';
 import { addNewUser, getAuthToken, getUserInfo, getFavorites } from '../../services/backend';
 import { Form, Button } from 'semantic-ui-react';
 import '../../stylesheets/LoginPage.css';
@@ -32,7 +32,7 @@ class LoginPage extends Component {
 					localStorage.setItem('token', payload.jwt)
 					getUserInfo(payload.user.id)
 						.then(data => this.props.setUserInfo(data))
-					this.props.changeLogin(true)
+						.then(this.props.loadScreen).then(this.finishLogin)
 				} else {
 					alert('That username is already taken!')
 				}
@@ -41,6 +41,12 @@ class LoginPage extends Component {
 			newName: '',
 			newPassword: ''
 		})
+	}
+
+	finishLogin = () => {
+		setTimeout(() => {
+			this.props.changeLogin(true)
+		}, 3000)
 	}
 
 	handleLogin = event => {
@@ -53,7 +59,7 @@ class LoginPage extends Component {
 					getUserInfo(payload.user.id)
 						.then(data => this.props.setUserInfo(data) && getFavorites(data.id))
 						.then(data => this.props.addToFavorites(data.tastes))
-					this.props.changeLogin(true)
+						.then(this.props.loadScreen).then(this.finishLogin)
 			} else {
 				alert("Invalid login!")
 			}
@@ -138,9 +144,16 @@ class LoginPage extends Component {
 		}
 				
 		return (
-			<div className='login-page-grid'>
-				{goBack}
-				{whichForm}
+			<div>
+				{this.props.form !== 'load' ?
+					<div className='login-page-grid'>
+						{goBack}
+						{whichForm}
+					</div>
+					:
+					<div className='load-screen'>
+					</div>
+				}
 			</div>
 		)
 	}
@@ -153,4 +166,4 @@ const mapStateToProps = state => {
 	})
 }
 
-export default connect(mapStateToProps, { clickLogin, clickSignUp, changeLogin, goBack, setUserInfo, addToFavorites })(LoginPage)
+export default connect(mapStateToProps, { clickLogin, clickSignUp, loadScreen, changeLogin, goBack, setUserInfo, addToFavorites })(LoginPage)

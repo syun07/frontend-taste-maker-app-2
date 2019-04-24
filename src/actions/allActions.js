@@ -14,6 +14,12 @@ export const clickSignUp = () => {
 	}
 }
 
+export const loadScreen = () => {
+	return {
+		type: 'LOAD_SCREEN'
+	}
+}
+
 // go back to button page
 export const goBack = () => {
 	return {

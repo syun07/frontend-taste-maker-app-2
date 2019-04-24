@@ -157,7 +157,6 @@ class MyWLCard extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log(state)
 	return ({
 		wavelength: state.wavelength,
 		userData: state.userData

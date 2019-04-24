@@ -31,6 +31,8 @@ export default (state = initialState, action) => {
 			return { ...state, form: 'l' }
 		case 'CLICK_SIGNUP':
 			return { ...state, form: 's' }
+		case 'LOAD_SCREEN':
+			return {...state, form: 'load' }
 		case 'GO_BACK':
 			return { ...state, form: 'b' }
 		case 'CHANGE_LOGIN':
