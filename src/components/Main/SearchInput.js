@@ -7,32 +7,10 @@ import { Input, Container, Button} from 'semantic-ui-react';
 import '../../stylesheets/MainPage.css'
 
 class SearchInput extends Component {
-	// constructor() {
-	// 	super()
-
-	// 	this.state = {
-	// 		filterBy: 'all'
-	// 	}
-	// }
-
-	// handleTrending = (event, { value }) => {
-	// 	this.setState({
-	// 		filterBy: value
-	// 	})
-	// }
-
-
-
 	// event listener for typing in input
 	handleChange = event => {
 		this.props.saveSearch(event.target.value)
-
-		// if (this.props.result) {
-			this.handleSearch(event.target.value, this.props.searchType)
-		// } else {
-		// 	const filterTrending = this.props.trending.filter(t => t.genre === this.props.searchType)
-		// 	this.props.addToTrending(filterTrending)
-		// }
+		this.handleSearch(event.target.value, this.props.searchType)
 	}
 
 	// event listener for clicking on genre
@@ -74,7 +52,7 @@ class SearchInput extends Component {
 				<h5>WHAT IS SOMETHING YOU LOVE?</h5>
 
 				<Input id='search'
-					placeholder='SEARCH A SONG/ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'
+					placeholder='SEARCH ANY ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'
 					onChange={(event) => this.handleChange(event)} />
 			
 				<h5>FILTER WAVELENGTH</h5>
@@ -132,8 +110,7 @@ const mapStateToProps = state => {
 		userSearch: state.userSearch,
 		searchType: state.searchType,
 		searchedData: state.searchedData,
-		result: state.result,
-		// trending: state.trending
+		result: state.result
 	})
 }
 

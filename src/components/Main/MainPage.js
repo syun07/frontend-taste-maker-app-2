@@ -53,11 +53,6 @@ class MainPage extends Component {
 					active={this.state.activeItem === 'home'}
 					onClick={() => this.handleItemClick('home')} />
 				
-				{/* <Menu.Item
-					name='EXPLORE'
-					active={this.state.activeItem === 'explore'}
-					onClick={() => this.handleItemClick('explore')} /> */}
-				
 				<Menu.Item
 					name='TRENDING'
 					active={this.state.activeItem === 'trending'}
