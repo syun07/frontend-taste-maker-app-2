@@ -66,6 +66,19 @@ class LoginPage extends Component {
 		})
 	}
 
+	handleDemo = () => {
+		getAuthToken({ name: 'hello', password: 'world' }).then(payload => {
+			if (payload.user) {
+				localStorage.setItem("token", payload.jwt)
+
+				getUserInfo(payload.user.id)
+					.then(data => this.props.setUserInfo(data) && getFavorites(data.id))
+					.then(data => this.props.addToFavorites(data.tastes))
+					.then(this.props.loadScreen).then(this.finishLogin)
+			}
+		})
+	}
+
 	render() {
 		const buttonPage =
 			<div className='button-page-container'>
@@ -82,6 +95,8 @@ class LoginPage extends Component {
 						<Button id='signup-btn'
 							onClick={this.props.clickSignUp}>SIGNUP</Button>
 					</Button.Group>
+					<br/>
+					<Button id='demo-btn' onClick={this.handleDemo}>CLICK HERE FOR DEMO</Button>
 				</div>
 			</div>
 

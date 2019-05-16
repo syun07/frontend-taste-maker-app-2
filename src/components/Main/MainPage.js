@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SearchInput from '../Main/SearchInput';
 import SearchResults from '../Main/SearchResults';
-import SearchIndividual from '../Main/SearchIndividual';
-import SearchIndResults from '../Main/SearchIndResults';
 import TrendingPage from '../Main/TrendingPage';
 import MyWLContainer from './MyWLContainer';
 import { changePage, changeLogin, goBack, addToFavorites, addToTrending, getSearchedData, getRecData, saveSearch, handleResult, handleTypeChange} from '../../actions/allActions';
@@ -78,12 +76,6 @@ class MainPage extends Component {
 				<SearchResults />
 			</Container>
 		
-		const searchIndPage =
-			<Container className='search-page-container'>
-				<SearchIndividual />
-				<SearchIndResults />
-			</Container>
-		
 		const wavelength =
 			<Container className='search-page-container'>
 				<MyWLContainer />
@@ -101,8 +93,6 @@ class MainPage extends Component {
 		if (this.props.activeItem === 'home') {
 			page = homePage
 			getTrending().then(data => this.props.addToTrending(data))
-		} else if (this.props.activeItem === 'explore') {
-			page = searchIndPage
 		} else if (this.props.activeItem === 'trending') {
 			page = trending
 		} else if (this.props.activeItem === 'wavelength') {

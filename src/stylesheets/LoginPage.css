@@ -46,8 +46,10 @@
 }
 
 .open-page-btns {
+	display: flex;
+	flex-direction: column;
 	position: absolute;
-	top: 250%;
+	top: 160px;
 }
 
 .labels {
@@ -57,7 +59,7 @@
 	color: rosybrown;
 }
 
-#login-btn, #signup-btn{
+#login-btn, #signup-btn, #demo-btn{
 	letter-spacing: 5px;
 }
 
@@ -66,6 +68,11 @@
 	color: white;
 }
 
+#demo-btn {
+	margin-left: 4px;
+	background-color: green;
+	color: white;
+}
 .ui.form {
 	display: flex;
 	flex-direction: column;
