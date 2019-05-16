@@ -49,7 +49,7 @@ class SearchInput extends Component {
 
 		return (
 			<Container className='search-input-container'>
-				<h5>WHAT IS SOMETHING YOU LOVE?</h5>
+				<h5>SEARCH FOR SOMETHING YOU LOVE</h5>
 
 				<Input id='search'
 					placeholder='SEARCH ANY ARTIST, MOVIE, SHOW, PODCAST, BOOK, OR GAME'

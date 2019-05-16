@@ -56,7 +56,7 @@
 
 .ui.input #search {
 	width: 34em !important;
-	height: 2em !important;
+	height: 3em !important;
 	text-align: center !important;
 }
 
@@ -75,6 +75,9 @@
 	display: none;
 }
 
+.search-input-container button {
+	height: 50px;
+}
 .type-tag {
 	position: absolute;
 	left: -23.7em;
